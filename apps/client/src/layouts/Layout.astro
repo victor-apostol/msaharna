@@ -2,11 +2,13 @@
 import Navbar from "@components/Navbar";
 import PomelnicModal from "@components/home/PomelnicModal.astro";
 import { getLocaleFromUrl, useTranslations } from "@i18n/utils";
+import { publicAsset } from "@utils/paths";
 
 import "@styles/global.css";
 
 const lang = getLocaleFromUrl(Astro.url);
 const t = useTranslations(lang);
+const faviconHref = publicAsset("/favicon.ico");
 ---
 
 <!doctype html>
@@ -16,7 +18,7 @@ const t = useTranslations(lang);
     <meta name="darkreader-lock" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={t("main.description")} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href={faviconHref} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>{t("main.title")}</title>

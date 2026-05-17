@@ -159,7 +159,7 @@
     .history-visual {
         background:
             linear-gradient(rgb(0 0 0 / 48%), rgb(0 0 0 / 48%)),
-            url("/images/history-header.png") center / cover no-repeat;
+            url("../images/history-header.png") center / cover no-repeat;
     }
 
     .representation-image {
@@ -171,19 +171,19 @@
     .representation-moscow {
         background:
             linear-gradient(rgb(0 0 0 / 8%), rgb(0 0 0 / 8%)),
-            url("/images/representation-first.jpg") center / cover no-repeat;
+            url("../images/representation-first.jpg") center / cover no-repeat;
     }
 
     .representation-gathering {
         background:
             linear-gradient(rgb(0 0 0 / 8%), rgb(0 0 0 / 8%)),
-            url("/images/representation-middle.jpg") center / cover no-repeat;
+            url("../images/representation-middle.jpg") center / cover no-repeat;
     }
 
     .representation-new-york {
         background:
             linear-gradient(rgb(0 0 0 / 8%), rgb(0 0 0 / 8%)),
-            url("/images/representation-third.jpg") center / cover no-repeat;
+            url("../images/representation-third.jpg") center / cover no-repeat;
     }
 
     .logo-tile {

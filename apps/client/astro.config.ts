@@ -9,7 +9,7 @@ export default defineConfig({
     prefetch: true,
     output: "static",
     site: "https://victor-apostol.github.io",
-    base: "/msaharna",
+    base: "/msaharna/",
 
     trailingSlash: "never",
     build: { format: "file" },

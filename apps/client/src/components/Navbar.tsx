@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 
 import type { Locale } from "@i18n";
 import { getLocalizedPath, useTranslations } from "@i18n/utils";
+import { stripBasePath } from "@utils/paths";
 
 type NavbarProps = {
   path: string;
@@ -10,7 +11,7 @@ type NavbarProps = {
 
 const Navbar = component$<NavbarProps>(({ path, lang }) => {
   const t = useTranslations(lang);
-  const normalizedPath = path.replace(/\.html$/, "");
+  const normalizedPath = stripBasePath(path).replace(/\.html$/, "") || "/";
   const isHome = normalizedPath === "/" || normalizedPath === `/${lang}`;
   const newsPath = getLocalizedPath("/posts", lang);
   const donationsPath = getLocalizedPath("/donations", lang);

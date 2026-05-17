@@ -1,6 +1,7 @@
 ---
 import type { Locale } from "@i18n";
 import { useTranslations } from "@i18n/utils";
+import { publicAsset } from "@utils/paths";
 
 type Props = {
   lang: Locale;
@@ -10,9 +11,9 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const heroPosterSrc =
   "https://commons.wikimedia.org/wiki/Special:Redirect/file/Monasterio_de_Saharna%2C_Saharna%2C_Moldavia%2C_2023-11-01%2C_DD_49-51_HDR.jpg";
-const heroMobileVideoSrc = "/hero/hero-monastery-720.webm";
-const heroDesktopVideoSrc = "/hero/hero-monastery-1280.webm";
-const heroMp4VideoSrc = "/hero/hero-monastery-1280.mp4";
+const heroMobileVideoSrc = publicAsset("/hero/hero-monastery-720.webm");
+const heroDesktopVideoSrc = publicAsset("/hero/hero-monastery-1280.webm");
+const heroMp4VideoSrc = publicAsset("/hero/hero-monastery-1280.mp4");
 ---
 
 <section

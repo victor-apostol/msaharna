@@ -1,6 +1,7 @@
 import { isKey } from "@utils/types";
 import { defaultLocale, locales, ui } from "@i18n";
 import type { AllTranslationKeys, Locale } from "@i18n";
+import { stripBasePath, withBasePath } from "@utils/paths";
 
 function getNestedValue(obj: object | undefined, path: string): string | undefined {
   const keys = path.split(".");
@@ -38,7 +39,7 @@ export function useTranslations(lang: Locale) {
 export type UseTranslations = ReturnType<typeof useTranslations>;
 
 export function getLocaleFromUrl(url: URL): Locale {
-  const [, langSegment] = url.pathname.split("/");
+  const [, langSegment] = stripBasePath(url.pathname).split("/");
   const lang = langSegment?.replace(/\.html$/, "");
 
   if (lang && lang in ui) {
@@ -51,10 +52,12 @@ export function getLocaleFromUrl(url: URL): Locale {
 export function getLocalizedPath(path: string, locale: Locale): string {
   const hashIndex = path.indexOf("#");
   const hash = hashIndex === -1 ? "" : path.slice(hashIndex);
-  const pathname = (hashIndex === -1 ? path : path.slice(0, hashIndex)).replace(/\.html$/, "");
+  const pathname = stripBasePath((hashIndex === -1 ? path : path.slice(0, hashIndex)).replace(/\.html$/, ""));
   const segments = pathname.split("/").filter(Boolean);
   const pathWithoutLocale = segments[0] && segments[0] in locales ? segments.slice(1) : segments;
   const localizedPath = locale === defaultLocale ? pathWithoutLocale : [locale, ...pathWithoutLocale];
 
-  return `/${localizedPath.join("/")}${hash}`;
+  const localizedUrl = `/${localizedPath.join("/")}${hash}`;
+
+  return withBasePath(localizedUrl);
 }
