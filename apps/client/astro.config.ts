@@ -8,6 +8,7 @@ import { defaultLocale, locales } from "./src/i18n";
 export default defineConfig({
     prefetch: true,
     output: "static",
+    base: process.env.PUBLIC_BASE_PATH || "/",
 
     trailingSlash: "never",
     build: { format: "file" },
