@@ -23,10 +23,7 @@ export default defineConfig({
             defaultLocale,
         }),
     ],
-    vite: {
-        base: siteBase,
-        plugins: [tailwindcss()],
-    },
+    vite: { plugins: [tailwindcss()] },
 });
 
 // Sitemap: https://github.com/jlarmstrongiv/astro-i18n-aut#configure
