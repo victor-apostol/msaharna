@@ -10,7 +10,10 @@ type Props = {
 
 const { path, lang } = Astro.props;
 const t = useTranslations(lang);
-const normalizedPath = stripBasePath(path).replace(/\.html$/, "") || "/";
+const normalizedPath =
+  stripBasePath(path)
+    .replace(/\.html$/, "")
+    .replace(/\/$/, "") || "/";
 const isHome = normalizedPath === "/" || normalizedPath === `/${lang}`;
 const newsPath = getLocalizedPath("/posts", lang);
 const donationsPath = getLocalizedPath("/donations", lang);
@@ -44,7 +47,7 @@ const languageItems = [
               href={getLocalizedPath(path, item.locale)}
               aria-label={t(`language.${item.locale}`)}
               aria-current={lang === item.locale ? "true" : undefined}>
-              <span class={`flag ${item.flagClass}`}></span> {item.label}
+              <span class={`flag ${item.flagClass}`} /> {item.label}
             </a>
           ))
         }
@@ -55,7 +58,7 @@ const languageItems = [
   <div class="bg-white">
     <input id="primary-menu-toggle" class="peer sr-only" type="checkbox" aria-hidden="true" />
     <div
-      class="mx-auto grid h-[82px] w-[min(1120px,calc(100%_-_20px))] grid-cols-[150px_1fr] items-center max-lg:grid-cols-[70px_1fr_auto] max-sm:h-[66px] max-sm:w-[calc(100%_-_32px)] max-sm:grid-cols-[52px_1fr_auto] peer-checked:[&_.burger-bottom]:top-[7px] peer-checked:[&_.burger-bottom]:-rotate-45 peer-checked:[&_.burger-middle]:opacity-0 peer-checked:[&_.burger-top]:top-[7px] peer-checked:[&_.burger-top]:rotate-45 max-sm:peer-checked:[&_.burger-bottom]:top-[6px] max-sm:peer-checked:[&_.burger-top]:top-[6px]">
+      class="mx-auto grid h-[82px] w-[min(1120px,calc(100%_-_20px))] grid-cols-[150px_1fr] items-center max-lg:grid-cols-[70px_1fr_auto] max-sm:h-[66px] max-sm:w-[calc(100%_-_32px)] max-sm:grid-cols-[52px_1fr_auto] peer-checked:[&_.burger-bottom]:top-[7px] peer-checked:[&_.burger-bottom]:-rotate-45 max-sm:peer-checked:[&_.burger-bottom]:top-[6px] peer-checked:[&_.burger-middle]:opacity-0 peer-checked:[&_.burger-top]:top-[7px] peer-checked:[&_.burger-top]:rotate-45 max-sm:peer-checked:[&_.burger-top]:top-[6px]">
       <a class="cathedral-mark" href={getLocalizedPath("/", lang)} aria-label={t("main.title")}>
         <span class="mark-dome mark-dome-left"></span>
         <span class="mark-dome mark-dome-center"></span>
@@ -95,8 +98,11 @@ const languageItems = [
         <span class="sr-only">{t("nav.menu")}</span>
         <span class="relative block h-4 w-5 max-sm:h-3.5 max-sm:w-4" aria-hidden="true">
           <span class="burger-top absolute top-0 left-0 h-0.5 w-5 bg-current transition max-sm:w-4"></span>
-          <span class="burger-middle absolute top-[7px] left-0 h-0.5 w-5 bg-current transition max-sm:top-[6px] max-sm:w-4"></span>
-          <span class="burger-bottom absolute top-3.5 left-0 h-0.5 w-5 bg-current transition max-sm:top-3 max-sm:w-4"></span>
+          <span
+            class="burger-middle absolute top-[7px] left-0 h-0.5 w-5 bg-current transition max-sm:top-[6px] max-sm:w-4"
+          ></span>
+          <span class="burger-bottom absolute top-3.5 left-0 h-0.5 w-5 bg-current transition max-sm:top-3 max-sm:w-4"
+          ></span>
         </span>
       </label>
     </div>
@@ -105,7 +111,8 @@ const languageItems = [
       id="primary-menu"
       class="hidden border-t border-neutral-200 bg-white peer-checked:block lg:hidden"
       aria-label={t("nav.menu")}>
-      <div class="mx-auto grid w-[min(1120px,calc(100%_-_20px))] gap-1 py-3 text-base font-bold text-[#3f3f3f] max-sm:w-[calc(100%_-_32px)]">
+      <div
+        class="mx-auto grid w-[min(1120px,calc(100%_-_20px))] gap-1 py-3 text-base font-bold text-[#3f3f3f] max-sm:w-[calc(100%_-_32px)]">
         {
           navItems.map((item) => (
             <a
