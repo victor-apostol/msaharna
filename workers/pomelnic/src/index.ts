@@ -44,25 +44,47 @@ export default {
     let submission: Submission;
     try {
       submission = await readSubmission(request, env);
-    } catch {
+    } catch (error) {
+      console.warn("[pomelnic] invalid form submission", {
+        error: error instanceof Error ? error.message : String(error),
+      });
       return redirectTo(env.SITE_URL, "invalid");
     }
 
     if (submission.honeypot) {
+      console.info("[pomelnic] honeypot submission ignored");
       return redirectTo(submission.redirect, "ok");
     }
 
     const validationError = validateSubmission(submission);
     if (validationError) {
+      console.warn("[pomelnic] validation failed", {
+        reason: validationError,
+        hasTurnstileToken: Boolean(submission.turnstileToken),
+        contentLengths: {
+          livingNames: submission.livingNames.length,
+          departedNames: submission.departedNames.length,
+          message: submission.message.length,
+        },
+        language: submission.language || "n/a",
+      });
       return redirectTo(submission.redirect, validationError);
     }
 
     const turnstileOk = await verifyTurnstile(submission.turnstileToken, request, env);
     if (!turnstileOk) {
+      console.warn("[pomelnic] turnstile verification failed");
       return redirectTo(submission.redirect, "challenge");
     }
 
     const sent = await sendPomelnicEmail(submission, env);
+    console.info("[pomelnic] submission processed", {
+      sent,
+      to: env.POMELNIC_TO,
+      from: env.RESEND_FROM,
+      language: submission.language || "n/a",
+    });
+
     return redirectTo(submission.redirect, sent ? "ok" : "send");
   },
 };
@@ -145,10 +167,20 @@ async function verifyTurnstile(token: string, request: Request, env: Env): Promi
   });
 
   if (!response.ok) {
+    console.warn("[pomelnic] turnstile endpoint failed", {
+      status: response.status,
+      statusText: response.statusText,
+    });
     return false;
   }
 
-  const result = (await response.json()) as { success?: boolean };
+  const result = (await response.json()) as { "error-codes"?: string[]; success?: boolean };
+  if (result.success !== true) {
+    console.warn("[pomelnic] turnstile rejected token", {
+      errorCodes: result["error-codes"] || [],
+    });
+  }
+
   return result.success === true;
 }
 
@@ -199,6 +231,17 @@ async function sendPomelnicEmail(submission: Submission, env: Env): Promise<bool
       html,
     }),
   });
+
+  if (!response.ok) {
+    const responseBody = await response.text().catch(() => "");
+    console.warn("[pomelnic] resend failed", {
+      status: response.status,
+      statusText: response.statusText,
+      body: responseBody,
+      from: env.RESEND_FROM,
+      to: env.POMELNIC_TO,
+    });
+  }
 
   return response.ok;
 }

@@ -1,11 +1,11 @@
 name: Deploy Pomelnic Worker
 
 on:
-  push:
-    branches: [dev]
-    paths:
-      - "workers/pomelnic/**"
-      - ".github/workflows/deploy-worker.yml"
+  # push:
+  #   branches: [dev]
+  #   paths:
+  #     - "workers/pomelnic/**"
+  #     - ".github/workflows/deploy-worker.yml"
   workflow_dispatch:
 
 permissions:

@@ -56,6 +56,9 @@ const textareaClass = `${inputClass} max-h-[280px] min-h-[150px] resize-y`;
     role="status"
     aria-live="polite"
     data-success={t("pomelnic.success")}
+    data-challenge="Verificarea anti-spam nu a fost finalizată. Te rugăm să bifezi verificarea și să trimiți din nou."
+    data-send="Formularul a ajuns la server, dar e-mailul nu a putut fi trimis."
+    data-invalid="Formularul trimis nu este valid. Te rugăm să reîncerci."
     data-error={t("pomelnic.error")}>
   </p>
 
@@ -133,7 +136,7 @@ const textareaClass = `${inputClass} max-h-[280px] min-h-[150px] resize-y`;
     if (status) {
       document.querySelectorAll("[data-pomelnic-status]").forEach((element) => {
         const isSuccess = status === "ok";
-        element.textContent = isSuccess ? element.dataset.success : element.dataset.error;
+        element.textContent = isSuccess ? element.dataset.success : element.dataset[status] || element.dataset.error;
         element.dataset.status = isSuccess ? "success" : "error";
         element.classList.remove("hidden");
       });
