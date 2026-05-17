@@ -1,36 +1,27 @@
-import type { CollectionAfterChangeHook } from "payload";
+import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from "payload";
 
 type DispatchBody = {
   event_type: string;
   client_payload: {
     collection: string;
+    id?: string | number;
+    filename?: string;
     slug?: string;
     status?: string;
   };
 };
 
-export const triggerRebuild: CollectionAfterChangeHook = async ({ doc, collection }) => {
-  if (doc.status !== "published") {
-    return doc;
-  }
-
+async function dispatchRebuild(body: DispatchBody) {
   const token = process.env.GITHUB_TOKEN;
   const owner = process.env.GITHUB_OWNER;
   const repo = process.env.GITHUB_REPO;
-  const eventType = process.env.GITHUB_EVENT_TYPE;
+  const eventType = process.env.GITHUB_EVENT_TYPE || body.event_type;
 
   if (!token || !owner || !repo || !eventType) {
-    return doc;
+    return;
   }
 
-  const body: DispatchBody = {
-    event_type: eventType,
-    client_payload: {
-      collection: collection.slug,
-      slug: typeof doc.slug === "string" ? doc.slug : undefined,
-      status: typeof doc.status === "string" ? doc.status : undefined,
-    },
-  };
+  body.event_type = eventType;
 
   const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
     method: "POST",
@@ -46,6 +37,38 @@ export const triggerRebuild: CollectionAfterChangeHook = async ({ doc, collectio
   if (!response.ok) {
     console.warn(`GitHub repository_dispatch failed: ${response.status} ${response.statusText}`);
   }
+}
+
+export const triggerRebuild: CollectionAfterChangeHook = async ({ doc, collection }) => {
+  if (collection.slug === "posts" && doc.status !== "published") {
+    return doc;
+  }
+
+  await dispatchRebuild({
+    event_type: process.env.GITHUB_EVENT_TYPE || "payload_publish",
+    client_payload: {
+      collection: collection.slug,
+      id: typeof doc.id === "string" || typeof doc.id === "number" ? doc.id : undefined,
+      filename: typeof doc.filename === "string" ? doc.filename : undefined,
+      slug: typeof doc.slug === "string" ? doc.slug : undefined,
+      status: typeof doc.status === "string" ? doc.status : undefined,
+    },
+  });
+
+  return doc;
+};
+
+export const triggerRebuildAfterDelete: CollectionAfterDeleteHook = async ({ doc, collection }) => {
+  await dispatchRebuild({
+    event_type: process.env.GITHUB_EVENT_TYPE || "payload_publish",
+    client_payload: {
+      collection: collection.slug,
+      id: typeof doc.id === "string" || typeof doc.id === "number" ? doc.id : undefined,
+      filename: typeof doc.filename === "string" ? doc.filename : undefined,
+      slug: typeof doc.slug === "string" ? doc.slug : undefined,
+      status: typeof doc.status === "string" ? doc.status : undefined,
+    },
+  });
 
   return doc;
 };

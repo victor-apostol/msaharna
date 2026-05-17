@@ -1,5 +1,7 @@
 import type { CollectionConfig } from "payload";
 
+import { triggerRebuild, triggerRebuildAfterDelete } from "../hooks/triggerRebuild";
+
 export const Media: CollectionConfig = {
   slug: "media",
   access: {
@@ -7,6 +9,10 @@ export const Media: CollectionConfig = {
   },
   admin: {
     useAsTitle: "alt",
+  },
+  hooks: {
+    afterChange: [triggerRebuild],
+    afterDelete: [triggerRebuildAfterDelete],
   },
   upload: {
     staticDir: "media",
