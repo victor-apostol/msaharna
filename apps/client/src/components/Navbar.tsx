@@ -7,6 +7,9 @@ import { stripBasePath } from "@utils/paths";
 type NavbarProps = {
   path: string;
   lang: Locale;
+  renderOpts?: {
+    base: string;
+  };
 };
 
 const Navbar = component$<NavbarProps>(({ path, lang }) => {
