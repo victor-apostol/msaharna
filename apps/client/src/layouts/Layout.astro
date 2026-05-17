@@ -1,15 +1,14 @@
 ---
-import Navbar from "@components/Navbar";
+import Navbar from "@components/Navbar.astro";
 import PomelnicModal from "@components/home/PomelnicModal.astro";
 import { getLocaleFromUrl, useTranslations } from "@i18n/utils";
-import { publicAsset, withBasePath } from "@utils/paths";
+import { publicAsset } from "@utils/paths";
 
 import "@styles/global.css";
 
 const lang = getLocaleFromUrl(Astro.url);
 const t = useTranslations(lang);
 const faviconHref = publicAsset("/favicon.ico");
-const qwikRenderOpts = { base: withBasePath("/") };
 ---
 
 <!doctype html>
@@ -25,7 +24,7 @@ const qwikRenderOpts = { base: withBasePath("/") };
     <title>{t("main.title")}</title>
   </head>
   <body>
-    <Navbar path={Astro.url.pathname} lang={lang} renderOpts={qwikRenderOpts} />
+    <Navbar path={Astro.url.pathname} lang={lang} />
     <PomelnicModal lang={lang} />
     <slot />
   </body>
