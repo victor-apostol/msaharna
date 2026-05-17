@@ -12,7 +12,11 @@ const { idPrefix, lang, compact = false } = Astro.props;
 const t = useTranslations(lang);
 const pomelnicWorkerUrl = import.meta.env.PUBLIC_POMELNIC_WORKER_URL;
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
-const formAction = pomelnicWorkerUrl ?? "#";
+const formAction = pomelnicWorkerUrl
+  ? pomelnicWorkerUrl.startsWith("http")
+    ? pomelnicWorkerUrl
+    : `https://${pomelnicWorkerUrl}`
+  : "#";
 const redirectUrl = `${Astro.url.origin}${Astro.url.pathname}#pomelnic-form`;
 
 const inputClass =
@@ -46,7 +50,7 @@ const textareaClass = `${inputClass} max-h-[280px] min-h-[150px] resize-y`;
   <input class="hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
 
   <p
-    class="data-[status=error]:border-[#fecdca] data-[status=error]:bg-[#fffbfa] data-[status=error]:text-[#b42318] data-[status=success]:border-[#abefc6] data-[status=success]:bg-[#f6fef9] data-[status=success]:text-[#027a48] hidden rounded-md border px-4 py-3 text-sm font-semibold"
+    class="hidden rounded-md border px-4 py-3 text-sm font-semibold data-[status=error]:border-[#fecdca] data-[status=error]:bg-[#fffbfa] data-[status=error]:text-[#b42318] data-[status=success]:border-[#abefc6] data-[status=success]:bg-[#f6fef9] data-[status=success]:text-[#027a48]"
     data-pomelnic-status
     id={`${idPrefix}-status`}
     role="status"
