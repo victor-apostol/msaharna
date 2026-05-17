@@ -11,8 +11,7 @@ export default defineConfig({
 
     trailingSlash: "never",
     build: { format: "file" },
-    // TODO: github pages
-    site: "https://manastirea-saharna.md",
+    site: process.env.PUBLIC_SITE_URL || "http://localhost:4321",
 
     integrations: [
         qwikdev(),
