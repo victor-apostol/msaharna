@@ -18,12 +18,27 @@ async function dispatchRebuild(body: DispatchBody) {
   const eventType = process.env.GITHUB_EVENT_TYPE || body.event_type;
 
   if (!token || !owner || !repo || !eventType) {
+    console.warn(
+      `[rebuild] skipped repository_dispatch: missing env ${[
+        !token && "GITHUB_TOKEN",
+        !owner && "GITHUB_OWNER",
+        !repo && "GITHUB_REPO",
+        !eventType && "GITHUB_EVENT_TYPE",
+      ]
+        .filter(Boolean)
+        .join(", ")}`,
+    );
     return;
   }
 
   body.event_type = eventType;
+  const url = `https://api.github.com/repos/${owner}/${repo}/dispatches`;
 
-  const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/dispatches`, {
+  console.info(
+    `[rebuild] sending repository_dispatch event="${eventType}" repo="${owner}/${repo}" collection="${body.client_payload.collection}"`,
+  );
+
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       Accept: "application/vnd.github+json",
@@ -35,12 +50,17 @@ async function dispatchRebuild(body: DispatchBody) {
   });
 
   if (!response.ok) {
-    console.warn(`GitHub repository_dispatch failed: ${response.status} ${response.statusText}`);
+    const responseBody = await response.text().catch(() => "");
+    console.warn(`GitHub repository_dispatch failed: ${response.status} ${response.statusText} ${responseBody}`);
+    return;
   }
+
+  console.info(`[rebuild] repository_dispatch accepted: ${response.status}`);
 }
 
 export const triggerRebuild: CollectionAfterChangeHook = async ({ doc, collection }) => {
   if (collection.slug === "posts" && doc.status !== "published") {
+    console.info(`[rebuild] skipped draft post id="${doc.id}" status="${doc.status}"`);
     return doc;
   }
 
