@@ -10,8 +10,9 @@ type Props = {
 
 const { idPrefix, lang, compact = false } = Astro.props;
 const t = useTranslations(lang);
-const web3FormsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
-const formAction = web3FormsAccessKey ? "https://api.web3forms.com/submit" : "#";
+const pomelnicWorkerUrl = import.meta.env.PUBLIC_POMELNIC_WORKER_URL;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const formAction = pomelnicWorkerUrl ?? "#";
 const redirectUrl = `${Astro.url.origin}${Astro.url.pathname}#pomelnic-form`;
 
 const inputClass =
@@ -20,12 +21,39 @@ const labelClass = "block text-sm font-bold text-neutral-800";
 const textareaClass = `${inputClass} max-h-[280px] min-h-[150px] resize-y`;
 ---
 
+{
+  turnstileSiteKey && (
+    <script is:inline>
+      {`
+        (() => {
+          if (!document.querySelector('script[data-turnstile-api]')) {
+            const script = document.createElement('script');
+            script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+            script.async = true;
+            script.defer = true;
+            script.dataset.turnstileApi = 'true';
+            document.head.appendChild(script);
+          }
+        })();
+      `}
+    </script>
+  )
+}
+
 <form class={compact ? "grid gap-4" : "grid gap-5"} action={formAction} method="post">
-  {web3FormsAccessKey && <input type="hidden" name="access_key" value={web3FormsAccessKey} />}
-  <input type="hidden" name="subject" value="Pomelnic nou de pe manastirea-saharna.md" />
-  <input type="hidden" name="from_name" value="Mănăstirea Saharna" />
   <input type="hidden" name="redirect" value={redirectUrl} />
+  <input type="hidden" name="language" value={lang} />
   <input class="hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+
+  <p
+    class="data-[status=error]:border-[#fecdca] data-[status=error]:bg-[#fffbfa] data-[status=error]:text-[#b42318] data-[status=success]:border-[#abefc6] data-[status=success]:bg-[#f6fef9] data-[status=success]:text-[#027a48] hidden rounded-md border px-4 py-3 text-sm font-semibold"
+    data-pomelnic-status
+    id={`${idPrefix}-status`}
+    role="status"
+    aria-live="polite"
+    data-success={t("pomelnic.success")}
+    data-error={t("pomelnic.error")}>
+  </p>
 
   <div class={compact ? "grid gap-4" : "grid gap-5 md:grid-cols-2"}>
     <label class={labelClass} for={`${idPrefix}-name`}>
@@ -72,6 +100,17 @@ const textareaClass = `${inputClass} max-h-[280px] min-h-[150px] resize-y`;
       placeholder={t("pomelnic.messagePlaceholder")}></textarea>
   </label>
 
+  {
+    turnstileSiteKey && (
+      <div
+        class="cf-turnstile min-h-[65px]"
+        data-sitekey={turnstileSiteKey}
+        data-theme="light"
+        data-size={compact ? "compact" : "normal"}
+      />
+    )
+  }
+
   <div class="flex flex-wrap items-center justify-between gap-4 pt-1">
     <p class="m-0 max-w-[520px] text-sm leading-6 text-neutral-500">
       {t("pomelnic.requiredHelp")}
@@ -83,3 +122,17 @@ const textareaClass = `${inputClass} max-h-[280px] min-h-[150px] resize-y`;
     </button>
   </div>
 </form>
+
+<script is:inline>
+  (() => {
+    const status = new URLSearchParams(window.location.search).get("pomelnic");
+    if (status) {
+      document.querySelectorAll("[data-pomelnic-status]").forEach((element) => {
+        const isSuccess = status === "ok";
+        element.textContent = isSuccess ? element.dataset.success : element.dataset.error;
+        element.dataset.status = isSuccess ? "success" : "error";
+        element.classList.remove("hidden");
+      });
+    }
+  })();
+</script>

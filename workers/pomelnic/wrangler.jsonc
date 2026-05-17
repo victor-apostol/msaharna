@@ -1,0 +1,15 @@
+{
+  "name": "manastirea-saharna-pomelnic",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-05-17",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGIN": "https://manastirea-saharna.md",
+    "POMELNIC_TO": "secretariat@manastirea-saharna.md",
+    "RESEND_FROM": "Pomelnic Saharna <noreply@manastirea-saharna.md>",
+    "SITE_URL": "https://manastirea-saharna.md"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

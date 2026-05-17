@@ -77,6 +77,30 @@ visitor (types email + message)
 - **One-time setup** — verify the sending domain in Resend (DNS: SPF + DKIM records).
 - **No storage** — the email is the only record. The Worker doesn't persist submissions and the Payload database is not involved.
 
+Implementation lives in:
+
+- `apps/client/src/components/PrayerRequestForm.astro` — static form markup, Turnstile widget, and POST target.
+- `workers/pomelnic/src/index.ts` — Cloudflare Worker validation + Resend delivery.
+- `.github/workflows/deploy-worker.yml` — CI deploy to Cloudflare Workers.
+
+Runtime configuration:
+
+- GitHub Actions repository variables for the static client build:
+  - `PUBLIC_POMELNIC_WORKER_URL`
+  - `PUBLIC_TURNSTILE_SITE_KEY`
+  - `PAYLOAD_API_URL` (optional; CI falls back to the Render URL currently in use)
+- GitHub Actions repository secrets for Worker deployment:
+  - `CLOUDFLARE_API_TOKEN`
+  - `CLOUDFLARE_ACCOUNT_ID`
+- Cloudflare Worker secrets:
+  - `RESEND_API_KEY`
+  - `TURNSTILE_SECRET_KEY`
+- Cloudflare Worker vars in `workers/pomelnic/wrangler.jsonc`:
+  - `ALLOWED_ORIGIN`
+  - `POMELNIC_TO`
+  - `RESEND_FROM`
+  - `SITE_URL`
+
 ## Email sending
 
 The Worker sends mail through an HTTP-based provider — Cloudflare Workers can't open outbound SMTP connections, so SMTP libraries are off the table. Free tiers that actually exist in 2026:

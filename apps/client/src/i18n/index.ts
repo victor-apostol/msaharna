@@ -99,6 +99,8 @@ export const ui = {
       messagePlaceholder: "Lasă aici orice detalii pentru slujbă.",
       requiredHelp: "Cererea va fi trimisă către biserică pentru pomenire. Câmpurile marcate cu * sunt obligatorii.",
       submit: "Trimite pomelnicul",
+      success: "Pomelnicul a fost trimis.",
+      error: "Nu am putut trimite pomelnicul. Te rugăm să încerci din nou.",
     },
     home: {
       heroLabel: "Mănăstirea Saharna",
@@ -214,6 +216,8 @@ export const ui = {
       messagePlaceholder: "Leave any details for the service here.",
       requiredHelp: "The request will be sent to the monastery for commemoration. Fields marked with * are required.",
       submit: "Submit pomelnic",
+      success: "The pomelnic has been sent.",
+      error: "We could not send the pomelnic. Please try again.",
     },
     home: {
       heroLabel: "Saharna Monastery",
@@ -329,6 +333,8 @@ export const ui = {
       messagePlaceholder: "Оставьте здесь дополнительные сведения для службы.",
       requiredHelp: "Записка будет отправлена в монастырь для поминовения. Поля, отмеченные *, обязательны.",
       submit: "Отправить помянник",
+      success: "Помянник отправлен.",
+      error: "Не удалось отправить помянник. Пожалуйста, попробуйте еще раз.",
     },
     home: {
       heroLabel: "Монастырь Сахарна",
