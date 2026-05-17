@@ -5,25 +5,25 @@ import i18n from "astro-i18n-aut/integration";
 
 import { defaultLocale, locales } from "./src/i18n";
 
-const siteBase = "/msaharna/";
+const siteBase = "/msaharna";
 
 export default defineConfig({
-    prefetch: true,
-    output: "static",
-    site: "https://victor-apostol.github.io",
-    base: siteBase,
+  prefetch: true,
+  output: "static",
+  site: "https://victor-apostol.github.io",
+  base: siteBase,
 
-    trailingSlash: "never",
-    build: { format: "file" },
+  // trailingSlash: "never",
+  // build: { format: "file" },
 
-    integrations: [
-        qwikdev(),
-        i18n({
-            locales,
-            defaultLocale,
-        }),
-    ],
-    vite: { plugins: [tailwindcss()] },
+  // integrations: [
+  //     qwikdev(),
+  //     i18n({
+  //         locales,
+  //         defaultLocale,
+  //     }),
+  // ],
+  vite: { plugins: [tailwindcss()] },
 });
 
 // Sitemap: https://github.com/jlarmstrongiv/astro-i18n-aut#configure
