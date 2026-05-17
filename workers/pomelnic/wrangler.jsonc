@@ -7,9 +7,9 @@
     "ALLOWED_ORIGIN": "https://victor-apostol.github.io",
     "POMELNIC_TO": "victorapostol679@gmail.com",
     "RESEND_FROM": "Pomelnic Saharna <noreply@manastirea-saharna.md>",
-    "SITE_URL": "https://victor-apostol.github.io/msaharna"
+    "SITE_URL": "https://victor-apostol.github.io/msaharna",
   },
   "observability": {
-    "enabled": true
-  }
+    "enabled": true,
+  },
 }

@@ -26,3 +26,4 @@ yarn.lock
 temp/
 .history/
 .DS_Store
+workers/pomelnic/wrangler.jsonc
