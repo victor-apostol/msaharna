@@ -22,11 +22,13 @@ const posts = await getRecentPosts(lang);
         {t("home.recentPosts")}
       </h2>
       <div class="mx-auto grid w-[min(1090px,calc(100%_-_20px))] grid-cols-3 gap-[60px] max-lg:grid-cols-1 max-lg:gap-7 max-sm:w-[calc(100%_-_32px)]">
-        {posts.map((post) => <PostCard post={post} lang={lang} />)}
+        {posts.map((post) => (
+          <PostCard post={post} lang={lang} />
+        ))}
       </div>
       <div class="mt-10 flex justify-center">
         <a
-          class="bg-church-green hover:bg-church-green/90 focus-visible:outline-church-green inline-flex min-h-12 items-center justify-center px-8 text-base font-bold text-white no-underline transition-colors focus-visible:outline-2 focus-visible:outline-offset-4"
+          class="bg-church-green focus-visible:outline-church-green inline-flex min-h-12 items-center justify-center rounded-md px-8 text-base font-bold text-white no-underline shadow-[0_8px_20px_rgb(8_115_61_/_20%)] transition hover:bg-[#065f32] focus-visible:outline-2 focus-visible:outline-offset-4"
           href={getLocalizedPath("/posts", lang)}>
           {t("home.allNews")}
         </a>
