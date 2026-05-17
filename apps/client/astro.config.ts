@@ -8,8 +8,7 @@ import { defaultLocale, locales } from "./src/i18n";
 export default defineConfig({
   prefetch: true,
   output: "static",
-  site: "https://victor-apostol.github.io",
-  base: "/msaharna",
+  site: "https://victor-apostol.github.io/msaharna",
 
   integrations: [
     qwikdev(),
@@ -20,6 +19,7 @@ export default defineConfig({
   ],
 
   vite: {
+    base: "/msaharna/",
     plugins: [tailwindcss()],
   },
 });
