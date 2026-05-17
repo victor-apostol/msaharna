@@ -1,4 +1,3 @@
-import qwikdev from "@qwikdev/astro";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import i18n from "astro-i18n-aut/integration";
@@ -12,7 +11,6 @@ export default defineConfig({
   base: "/msaharna",
 
   integrations: [
-    qwikdev(),
     i18n({
       locales,
       defaultLocale,
