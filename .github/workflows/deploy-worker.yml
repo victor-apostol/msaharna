@@ -2,7 +2,7 @@ name: Deploy Pomelnic Worker
 
 on:
   push:
-    branches: []
+    branches: [dev]
     paths:
       - "workers/pomelnic/**"
       - ".github/workflows/deploy-worker.yml"
