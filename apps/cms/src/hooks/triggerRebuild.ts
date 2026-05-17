@@ -59,8 +59,12 @@ async function dispatchRebuild(body: DispatchBody) {
 }
 
 export const triggerRebuild: CollectionAfterChangeHook = async ({ doc, collection }) => {
+  console.log(
+    `[rebuild] afterChange collection="${collection.slug}" id="${doc.id}" status="${typeof doc.status === "string" ? doc.status : "n/a"}"`,
+  );
+
   if (collection.slug === "posts" && doc.status !== "published") {
-    console.info(`[rebuild] skipped draft post id="${doc.id}" status="${doc.status}"`);
+    console.log(`[rebuild] skipped draft post id="${doc.id}" status="${doc.status}"`);
     return doc;
   }
 
@@ -79,6 +83,8 @@ export const triggerRebuild: CollectionAfterChangeHook = async ({ doc, collectio
 };
 
 export const triggerRebuildAfterDelete: CollectionAfterDeleteHook = async ({ doc, collection }) => {
+  console.log(`[rebuild] afterDelete collection="${collection.slug}" id="${doc.id}"`);
+
   await dispatchRebuild({
     event_type: process.env.GITHUB_EVENT_TYPE || "payload_publish",
     client_payload: {
