@@ -25,25 +25,6 @@ const labelClass = "block text-sm font-bold text-neutral-800";
 const textareaClass = `${inputClass} max-h-[280px] min-h-[150px] resize-y`;
 ---
 
-{
-  turnstileSiteKey && (
-    <script is:inline>
-      {`
-        (() => {
-          if (!document.querySelector('script[data-turnstile-api]')) {
-            const script = document.createElement('script');
-            script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-            script.async = true;
-            script.defer = true;
-            script.dataset.turnstileApi = 'true';
-            document.head.appendChild(script);
-          }
-        })();
-      `}
-    </script>
-  )
-}
-
 <form class={compact ? "grid gap-4" : "grid gap-5"} action={formAction} method="post">
   <input type="hidden" name="redirect" value={redirectUrl} />
   <input type="hidden" name="language" value={lang} />
@@ -129,6 +110,8 @@ const textareaClass = `${inputClass} max-h-[280px] min-h-[150px] resize-y`;
     </button>
   </div>
 </form>
+
+{turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />}
 
 <script is:inline>
   (() => {
