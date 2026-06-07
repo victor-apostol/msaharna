@@ -6,7 +6,7 @@
   "vars": {
     "ALLOWED_ORIGIN": "https://victor-apostol.github.io",
     "POMELNIC_TO": "secretar.saharna@gmail.com",
-    "RESEND_FROM": "Pomelnic Saharna <onboarding@resend.dev>",
+    "RESEND_FROM": "Pomelnic Saharna <noreply@manastirea-saharna.md>",
     "SITE_URL": "https://victor-apostol.github.io/msaharna"
   },
   "observability": {
