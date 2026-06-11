@@ -1,0 +1,30 @@
+---
+import type { Locale } from "@i18n";
+import { getLocalizedPath } from "@i18n/utils";
+
+type Props = {
+  lang: Locale;
+};
+
+const { lang } = Astro.props;
+const donationsPath = getLocalizedPath("/donations", lang);
+---
+
+<section class="border-sacred-gold bg-church-green border-y-2 px-4 py-14 text-center">
+  <p class="text-sacred-gold mb-4 font-sans text-xs uppercase">Veniți la Saharna</p>
+  <p class="text-parchment mx-auto max-w-[760px] text-[32px] leading-[1.35] italic max-sm:text-2xl">
+    "Unde duhul dumnezeiesc își deschide porțile"
+  </p>
+  <div class="mt-9 flex justify-center gap-5 max-sm:flex-col max-sm:items-center">
+    <a
+      class="bg-sacred-gold text-ink hover:bg-parchment inline-flex min-h-[52px] w-[200px] items-center justify-center rounded-sm font-sans text-sm uppercase transition"
+      href="#cum-de-ajuns">
+      Planificați vizita
+    </a>
+    <a
+      class="border-sacred-gold text-sacred-gold hover:bg-sacred-gold hover:text-ink inline-flex min-h-[52px] w-[200px] items-center justify-center rounded-sm border font-sans text-sm uppercase transition"
+      href={donationsPath}>
+      Donați
+    </a>
+  </div>
+</section>

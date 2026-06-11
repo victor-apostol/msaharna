@@ -1,5 +1,6 @@
 ---
 import Navbar from "@components/Navbar.astro";
+import SiteFooter from "@components/SiteFooter.astro";
 import PomelnicModal from "@components/home/PomelnicModal.astro";
 import { getLocaleFromUrl, useTranslations } from "@i18n/utils";
 import { publicAsset } from "@utils/paths";
@@ -27,5 +28,6 @@ const faviconHref = publicAsset("/favicon.ico");
     <Navbar path={Astro.url.pathname} lang={lang} />
     <PomelnicModal lang={lang} />
     <slot />
+    <SiteFooter lang={lang} />
   </body>
 </html>

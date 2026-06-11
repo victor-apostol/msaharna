@@ -57,7 +57,8 @@ export function getLocalizedPath(path: string, locale: Locale): string {
   const pathWithoutLocale = segments[0] && segments[0] in locales ? segments.slice(1) : segments;
   const localizedPath = locale === defaultLocale ? pathWithoutLocale : [locale, ...pathWithoutLocale];
 
-  const localizedUrl = `/${localizedPath.join("/")}${hash}`;
+  const localizedUrlPath = `/${localizedPath.join("/")}`;
+  const localizedUrl = `${localizedUrlPath === "/" ? localizedUrlPath : `${localizedUrlPath}/`}${hash}`;
 
   return withBasePath(localizedUrl);
 }

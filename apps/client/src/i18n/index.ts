@@ -37,7 +37,10 @@ export const ui = {
     nav: {
       home: "Acasă",
       news: "Noutăți",
-      contact: "Contact",
+      presentation: "Prezentare",
+      directions: "Cum de ajuns?",
+      serviceSchedule: "Programul slujbelor",
+      contact: "Contacte",
       donations: "Donații",
       pomelnic: "Pomelnic",
       menu: "Meniu",
@@ -106,7 +109,8 @@ export const ui = {
       heroLabel: "Mănăstirea Saharna",
       heroTitle: "Mănăstirea Saharna",
       heroSubtitle: "Loc de rugăciune, pelerinaj și pace sufletească",
-      quote: '"Să păstrăm vie credința prin rugăciune, milostenie și dragoste față de aproapele."',
+      quote:
+        '"Bine ai venit pelerine! Trecând cu credință pragul sfintei mănăstiri, vei primi binecuvântarea Sfintei Treimi. Aici, roadele pământului devin Trupul și Sângele lui Hristos spre viață veșnică, iar Maica Domnului vă îmbrățișează ca moștenitori ai Împărăției cerești."',
       quoteAuthor: "- Obștea Mănăstirii Saharna",
       recentPosts: "Noutăți",
       allNews: "Toate noutățile",
@@ -154,6 +158,9 @@ export const ui = {
     nav: {
       home: "Home",
       news: "News",
+      presentation: "Presentation",
+      directions: "How to get here?",
+      serviceSchedule: "Service schedule",
       contact: "Contact Us",
       donations: "Donations",
       pomelnic: "Pomelnic",
@@ -271,6 +278,9 @@ export const ui = {
     nav: {
       home: "Главная",
       news: "Новости",
+      presentation: "Обзор",
+      directions: "Как добраться?",
+      serviceSchedule: "Расписание служб",
       contact: "Контакты",
       donations: "Пожертвования",
       pomelnic: "Помянник",

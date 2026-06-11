@@ -1,0 +1,64 @@
+---
+import type { Locale } from "@i18n";
+import { getLocalizedPath } from "@i18n/utils";
+import { publicAsset } from "@utils/paths";
+
+type Props = {
+  lang: Locale;
+};
+
+const { lang } = Astro.props;
+const donationsPath = getLocalizedPath("/donations", lang);
+const heroImage = publicAsset("/images/history-header.png");
+---
+
+<section id="prezentare" class="bg-parchment-deep">
+  <div
+    class="mx-auto grid min-h-[700px] w-[min(1200px,calc(100%_-_40px))] grid-cols-[minmax(0,760px)_minmax(280px,1fr)] items-center gap-14 py-14 max-lg:min-h-0 max-lg:grid-cols-1 max-lg:gap-10 max-md:w-[calc(100%_-_32px)] max-sm:py-10">
+    <div class="relative px-6 py-10 max-sm:px-4 max-sm:py-6">
+      <span class="bg-sacred-gold absolute top-0 bottom-0 left-0 w-[3px]" aria-hidden="true"></span>
+      <span class="bg-sacred-gold absolute top-0 left-[-14px] h-[5px] w-8" aria-hidden="true"></span>
+      <span class="bg-sacred-gold absolute bottom-0 left-[-14px] h-[5px] w-8" aria-hidden="true"></span>
+      <span class="bg-sacred-gold absolute top-0 right-0 bottom-0 w-[3px]" aria-hidden="true"></span>
+      <span class="bg-sacred-gold absolute top-0 right-[-14px] h-[5px] w-8" aria-hidden="true"></span>
+      <span class="bg-sacred-gold absolute right-[-14px] bottom-0 h-[5px] w-8" aria-hidden="true"></span>
+
+      <figure class="bg-parchment-line relative overflow-hidden rounded-sm">
+        <img
+          class="h-[500px] w-full object-cover opacity-80 max-sm:h-[330px]"
+          src={heroImage}
+          alt="Mănăstirea Saharna văzută de sus"
+        />
+        <figcaption class="text-muted-brown absolute right-0 bottom-5 left-0 text-center text-sm italic">
+          - Fotografie Mănăstire -
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="max-w-[360px] justify-self-end max-lg:max-w-[620px] max-lg:justify-self-start">
+      <p class="text-muted-brown mb-4 font-serif text-sm uppercase">Unde duhul dumnezeiesc...</p>
+      <h1 class="mb-5 font-serif text-[44px] leading-[1.14] font-bold uppercase max-sm:text-[32px]">
+        Își deschide porțile Saharna
+      </h1>
+      <div class="bg-sacred-gold mb-4 h-0.5 w-14"></div>
+      <p class="mb-8 text-[17px] leading-7">
+        Un loc sfânt al rugăciunii și al harului dumnezeiesc, în inima Moldovei pe malul Nistrului.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a
+          class="bg-church-green text-parchment hover:bg-ink inline-flex min-h-[50px] items-center justify-center rounded-sm px-7 font-sans text-sm uppercase transition"
+          href="#cum-de-ajuns">
+          Vizitați-ne
+        </a>
+        <a
+          class="border-church-green text-church-green hover:bg-church-green hover:text-parchment inline-flex min-h-[50px] items-center justify-center rounded-sm border px-7 font-sans text-sm uppercase transition"
+          href={donationsPath}>
+          Donați
+        </a>
+      </div>
+    </div>
+  </div>
+  <p class="text-muted-brown mx-auto w-[min(1200px,calc(100%_-_32px))] pb-6 text-center text-sm italic">
+    Casa Dumnezeieștii Treimi · site-ul oficial al Mănăstirii Saharna
+  </p>
+</section>

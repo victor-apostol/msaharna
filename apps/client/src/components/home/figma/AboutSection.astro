@@ -1,0 +1,57 @@
+---
+import logoUrl from "../../../../../../Logo_preview_big.png?url";
+---
+
+<section class="bg-parchment py-16 max-sm:py-12">
+  <div
+    class="mx-auto grid w-[min(1200px,calc(100%_-_40px))] grid-cols-[minmax(0,1fr)_minmax(360px,580px)] gap-16 max-lg:grid-cols-1 max-md:w-[calc(100%_-_32px)]">
+    <div>
+      <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">Despre Mănăstire</p>
+      <h2 class="mb-5 max-w-[560px] font-serif text-[46px] leading-[1.16] font-bold uppercase max-sm:text-[32px]">
+        Casa Dumnezeieștii Treimi
+      </h2>
+      <div class="bg-sacred-gold mb-5 h-0.5 w-[70px]"></div>
+      <div class="max-w-[560px] space-y-5 text-[17px] leading-[1.75]">
+        <p>
+          Mănăstirea Saharna, așezată pe malul drept al Nistrului în raionul Rezina, este una dintre cele mai vechi și
+          renumite mănăstiri din Moldova. Ctitorită în veacul al XVIII-lea, ea adăpostește moaștele Cuviosului Macarie
+          și o icoană miraculoasă a Maicii Domnului.
+        </p>
+        <p>
+          Liniștea codrilor, glasul apelor și cântul de rugăciune al monahilor transformă Saharna într-un loc de
+          vindecare a sufletului, căutat de mii de pelerini în fiecare an.
+        </p>
+      </div>
+      <a class="text-church-green hover:text-sacred-gold mt-8 inline-flex text-[17px] italic" href="#prezentare"
+        >Află istoria mănăstirii -&gt;</a
+      >
+    </div>
+
+    <div class="bg-parchment-deep relative min-h-[460px] rounded-sm p-8 max-sm:min-h-0">
+      <div
+        class="border-sacred-gold bg-parchment mx-auto grid h-28 w-28 place-items-center overflow-hidden rounded-full border-2">
+        <img
+          class="h-full w-full object-cover object-center mix-blend-multiply"
+          src={logoUrl}
+          alt="Logo Mănăstirea Saharna"
+          loading="lazy"
+        />
+      </div>
+      <div class="bg-sacred-gold mx-auto h-20 w-1"></div>
+      <div class="mt-16 grid grid-cols-3 gap-0 text-center max-sm:mt-10 max-sm:grid-cols-1 max-sm:gap-8">
+        <div>
+          <p class="font-serif text-[40px] leading-none font-bold">1776</p>
+          <p class="text-muted-brown mt-2 text-sm italic">Fondată în</p>
+        </div>
+        <div class="border-parchment-line border-x max-sm:border-x-0">
+          <p class="font-serif text-[40px] leading-none font-bold">XV+</p>
+          <p class="text-muted-brown mt-2 text-sm italic">Monahi</p>
+        </div>
+        <div>
+          <p class="font-serif text-[40px] leading-none font-bold">365</p>
+          <p class="text-muted-brown mt-2 text-sm italic">Zile de rugăciune</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

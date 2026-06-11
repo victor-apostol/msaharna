@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-    --color-church-green: #08733d;
+    --color-church-green: #253528;
+    --color-footer-brown: #1a1208;
+    --color-header-cream: #f6f2e9;
+    --color-parchment: #f6f2e9;
+    --color-parchment-deep: #e8e0d0;
+    --color-parchment-line: #ccc2b3;
+    --color-sacred-gold: #c4a24a;
+    --color-ink: #1a1208;
+    --color-muted-brown: #807566;
     --color-site-gray: #f2f2f2;
     --color-gold: #e79d24;
     --font-display: "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
@@ -9,7 +17,7 @@
 
 @layer base {
     body {
-        @apply m-0 bg-site-gray text-[#2d2d2d];
+        @apply bg-parchment text-ink m-0;
         font-family: Georgia, "Times New Roman", serif;
     }
 

@@ -1,19 +1,27 @@
 ---
-import HomeFooter from "@components/home/HomeFooter.astro";
-import HomeHero from "@components/home/HomeHero.astro";
-import HomeQuote from "@components/home/HomeQuote.astro";
-import HistoryBand from "@components/home/HistoryBand.astro";
-import PomelnicSection from "@components/home/PomelnicSection.astro";
-import RecentPosts from "@components/home/RecentPosts.astro";
-import RepresentationSection from "@components/home/RepresentationSection.astro";
+import FigmaHomepage from "@components/home/FigmaHomepage.astro";
 import Layout from "@layouts/Layout.astro";
 import { getLocaleFromUrl } from "@i18n/utils";
+
+// Existing homepage sections kept for reuse while the Figma design is being introduced.
+// import HomeFooter from "@components/home/HomeFooter.astro";
+// import HomeHero from "@components/home/HomeHero.astro";
+// import HomeQuote from "@components/home/HomeQuote.astro";
+// import HistoryBand from "@components/home/HistoryBand.astro";
+// import PomelnicSection from "@components/home/PomelnicSection.astro";
+// import RecentPosts from "@components/home/RecentPosts.astro";
+// import RepresentationSection from "@components/home/RepresentationSection.astro";
 
 const lang = getLocaleFromUrl(Astro.url);
 ---
 
 <Layout>
-  <main class="bg-site-gray overflow-hidden">
+  <main class="bg-parchment overflow-hidden">
+    <FigmaHomepage lang={lang} />
+
+    <!--
+    Legacy homepage sections retained below the new Figma-derived design.
+
     <HomeHero lang={lang} />
     <HomeQuote lang={lang} />
     <RecentPosts lang={lang} />
@@ -21,5 +29,6 @@ const lang = getLocaleFromUrl(Astro.url);
     <RepresentationSection lang={lang} />
     <PomelnicSection lang={lang} />
     <HomeFooter lang={lang} />
+    -->
   </main>
 </Layout>

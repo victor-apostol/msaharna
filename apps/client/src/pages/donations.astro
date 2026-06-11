@@ -17,13 +17,13 @@ const bankDetails = [
 ---
 
 <Layout>
-  <main class="bg-site-gray min-h-screen">
-    <section class="bg-white py-16 max-sm:py-12" aria-labelledby="donations-title">
+  <main class="bg-parchment min-h-screen text-ink">
+    <section class="bg-parchment-deep border-b border-parchment-line py-16 max-sm:py-12" aria-labelledby="donations-title">
       <div class="mx-auto w-[min(1120px,calc(100%_-_20px))] max-sm:w-[calc(100%_-_32px)]">
-        <span class="bg-gold mb-8 block h-0.5 w-[70px]"></span>
+        <span class="bg-sacred-gold mb-8 block h-0.5 w-[70px]"></span>
         <h1
           id="donations-title"
-          class="font-display text-church-green m-0 text-[clamp(42px,5vw,72px)] leading-none font-bold tracking-normal uppercase">
+          class="m-0 font-serif text-[clamp(42px,5vw,72px)] leading-none font-bold tracking-normal text-ink uppercase">
           {t("donations.title")}
         </h1>
       </div>
@@ -31,28 +31,29 @@ const bankDetails = [
 
     <section class="py-16 max-sm:py-10">
       <div class="mx-auto w-[min(860px,calc(100%_-_20px))] max-sm:w-[calc(100%_-_32px)]">
-        <article class="bg-white p-7 shadow-[0_0_0_1px_#dedede] md:p-10">
-          <div class="grid gap-5 text-[19px] leading-8 text-neutral-600">
-            <p class="m-0 text-xl font-bold text-neutral-800">{t("donations.greeting")}</p>
+        <article class="border-parchment-line bg-parchment border-t-4 border-t-sacred-gold p-7 shadow-[0_0_0_1px_var(--color-parchment-line)] md:p-10">
+          <div class="grid gap-5 text-[19px] leading-8 text-ink">
+            <p class="m-0 text-xl font-bold">{t("donations.greeting")}</p>
             <p class="m-0">{t("donations.message")}</p>
             <p class="m-0">{t("donations.detailsIntro")}</p>
-            <p class="m-0 font-bold text-neutral-800">{t("donations.bankNote")}</p>
+            <p class="m-0 font-bold">{t("donations.bankNote")}</p>
           </div>
 
-          <section class="mt-8 rounded-md border border-neutral-200 bg-neutral-50 p-5">
-            <h2 class="font-display text-church-green mt-0 mb-5 text-[30px] leading-none font-bold">
+          <section class="border-parchment-line bg-parchment-deep mt-8 rounded-sm border p-5">
+            <h2 class="mt-0 mb-5 font-serif text-[30px] leading-none font-bold text-ink">
               {t("donations.bankDetailsTitle")}
             </h2>
-            <ul class="m-0 grid list-none gap-2 p-0 text-base leading-7 text-neutral-700">
+            <ul class="m-0 grid list-none gap-2 p-0 text-base leading-7 text-ink">
               {bankDetails.map((detail) => <li>{detail}</li>)}
             </ul>
           </section>
 
           <a
-            class="bg-church-green mt-8 inline-flex min-h-12 items-center justify-center rounded-md px-7 py-3 font-bold text-white no-underline shadow-[0_12px_24px_rgb(8_115_61_/_22%)] transition hover:bg-[#065f32]"
+            class="border-sacred-gold bg-parchment-deep text-ink hover:bg-sacred-gold mt-8 flex min-h-12 w-full max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-sm border px-5 py-3 text-center font-bold break-words no-underline transition sm:inline-flex sm:w-auto sm:px-7"
             href="https://paypal.me/iuvenalie">
-            {t("donations.paypalLabel")}
-            {t("donations.paypalValue")}
+            <span>{t("donations.paypalLabel")}</span>
+            <span class="text-sacred-gold" aria-hidden="true">·</span>
+            <span>{t("donations.paypalValue")}</span>
           </a>
         </article>
       </div>

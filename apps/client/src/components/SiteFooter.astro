@@ -1,0 +1,40 @@
+---
+import type { Locale } from "@i18n";
+import { getLocalizedPath } from "@i18n/utils";
+
+type Props = {
+  lang: Locale;
+};
+
+const { lang } = Astro.props;
+const homePath = getLocalizedPath("/", lang);
+const homeAnchor = (id: string) => `${homePath}#${id}`;
+const footerLinks = [
+  { label: "Prezentare", href: homeAnchor("prezentare") },
+  { label: "Cum de ajuns?", href: homeAnchor("cum-de-ajuns") },
+  { label: "Programul slujbelor", href: homeAnchor("programul-slujbelor") },
+  { label: "Contacte", href: homeAnchor("contacte") },
+  { label: "Donații", href: getLocalizedPath("/donations", lang) },
+] as const;
+---
+
+<footer class="border-sacred-gold bg-footer-brown text-muted-brown border-t-4 px-5 py-10">
+  <div class="mx-auto w-[min(1200px,calc(100%_-_20px))]">
+    <div class="mb-8">
+      <p class="text-parchment font-serif text-lg font-bold uppercase">Mănăstirea Saharna</p>
+      <p class="mt-2 text-sm italic">Casa Dumnezeieștii Treimi - Saharna, Moldova</p>
+    </div>
+    <nav class="mb-8 grid grid-cols-5 gap-5 text-sm max-lg:grid-cols-2 max-sm:grid-cols-1" aria-label="Meniu subsol">
+      {
+        footerLinks.map((item) => (
+          <a class="hover:text-parchment" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="border-t border-[#383026] pt-5 text-center text-sm">
+      © 2026 Mănăstirea Saharna. Toate drepturile rezervate. Republica Moldova.
+    </div>
+  </div>
+</footer>

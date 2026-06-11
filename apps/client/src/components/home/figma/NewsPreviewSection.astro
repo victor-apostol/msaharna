@@ -1,0 +1,61 @@
+---
+import type { Locale } from "@i18n";
+import { getLocalizedPath } from "@i18n/utils";
+
+type Props = {
+  lang: Locale;
+};
+
+const { lang } = Astro.props;
+const postsPath = getLocalizedPath("/posts", lang);
+const newsItems = [
+  {
+    type: "Sărbătoare",
+    date: "12 Mai 2025",
+    title: "Hramul Mănăstirii Saharna",
+    text: "În ziua Înălțării Sfintei Cruci, pelerinii au umplut curtea mănăstirii. Slujba solemnă a hramului a fost condusă de Mitropolitul Moldovei.",
+  },
+  {
+    type: "Restaurare",
+    date: "3 Mai 2025",
+    title: "Lucrări la Paraclisul Sf. Macarie",
+    text: "Cu ajutorul donatorilor credincioși au început lucrările de renovare a paraclisului istoric. Finalizarea e preconizată în toamnă.",
+  },
+  {
+    type: "Publicații",
+    date: "18 Apr. 2025",
+    title: "Calendarul Liturgic 2025",
+    text: "Calendarul ortodox al mănăstirii pentru 2025 este disponibil la cancelarie sau poate fi descărcat de pe site.",
+  },
+] as const;
+---
+
+<section class="bg-parchment-deep py-16">
+  <div class="mx-auto w-[min(1200px,calc(100%_-_40px))] max-md:w-[calc(100%_-_32px)]">
+    <div class="border-sacred-gold border-t pt-12">
+      <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">Ultimele știri</p>
+      <h2 class="mb-5 font-serif text-[38px] leading-tight font-bold uppercase max-sm:text-[30px]">
+        Din viața mănăstirii
+      </h2>
+      <div class="bg-sacred-gold mb-8 h-0.5 w-16"></div>
+    </div>
+    <div class="grid grid-cols-3 gap-5 max-lg:grid-cols-1">
+      {
+        newsItems.map((item) => (
+          <article class="border-sacred-gold bg-parchment min-h-[360px] rounded-sm border-t-4 p-8">
+            <p class="bg-parchment-deep text-muted-brown mb-3 inline-flex rounded-full px-3 py-1 font-sans text-xs uppercase">
+              {item.type}
+            </p>
+            <p class="text-muted-brown mb-2 text-sm italic">{item.date}</p>
+            <h3 class="mb-5 font-serif text-xl leading-7 font-bold uppercase">{item.title}</h3>
+            <div class="bg-sacred-gold mb-5 h-px w-10" />
+            <p class="text-base leading-7">{item.text}</p>
+            <a class="text-church-green hover:text-sacred-gold mt-8 inline-flex text-base italic" href={postsPath}>
+              Citește mai mult -&gt;
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

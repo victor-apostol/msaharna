@@ -10,7 +10,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<footer class="bg-[#202020] px-5 text-white lg:px-20">
+<footer class="bg-footer-brown px-5 text-white lg:px-20">
   <div
     class="mx-auto grid grid-cols-[310px_300px_360px] items-start gap-[76px] py-10 text-sm max-lg:grid-cols-1 max-lg:gap-7">
     <address class="m-0 text-sm leading-[1.78] font-bold not-italic">
@@ -42,7 +42,7 @@ const t = useTranslations(lang);
     </address>
   </div>
   <div
-    class="flex items-center justify-between bg-[#171717] py-5 text-neutral-500 shadow-[50vw_0_0_#171717,-50vw_0_0_#171717]">
+    class="bg-footer-brown flex items-center justify-between py-5 text-neutral-500 shadow-[50vw_0_0_var(--color-footer-brown),-50vw_0_0_var(--color-footer-brown)]">
     <p class="m-0 text-sm font-bold">{t("footer.copyright")}</p>
     <!-- <nav
       class="col-start-2 row-span-2 row-start-1 flex gap-6 font-sans text-[28px] font-bold text-neutral-300 max-sm:col-auto max-sm:row-auto max-sm:mt-3.5"

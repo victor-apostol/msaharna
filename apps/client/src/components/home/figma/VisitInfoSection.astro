@@ -1,0 +1,73 @@
+---
+const contactItems = [
+  { label: "Adresa", value: "Saharna, Rezina, Republica Moldova" },
+  { label: "Telefon", value: "+373 254 21-XXX" },
+  { label: "Email", value: "office@manastireasaharna.md" },
+  { label: "Ore vizite", value: "Zilnic: 08:00 - 20:00" },
+] as const;
+const weekdays = ["Lun", "Mar", "Mie", "Joi", "Vin", "Sâm", "Dum"] as const;
+const calendarCells = [
+  ...Array.from({ length: 3 }, () => null),
+  ...Array.from({ length: 31 }, (_, index) => index + 1),
+];
+---
+
+<section id="cum-de-ajuns" class="grid grid-cols-[minmax(0,620px)_minmax(0,1fr)] max-lg:grid-cols-1">
+  <div
+    id="calendar-liturgic"
+    class="bg-parchment px-[max(32px,calc((100vw-1200px)/2))] py-14 lg:pr-20 lg:pl-[max(32px,calc((100vw-1200px)/2))]">
+    <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">Calendar liturgic</p>
+    <h2 class="mb-5 font-serif text-[34px] leading-none font-bold uppercase">Mai 2025</h2>
+    <div class="border-parchment-line max-w-[380px] border-t pt-4">
+      <div class="text-muted-brown mb-4 grid grid-cols-7 gap-y-3 font-sans text-xs">
+        {weekdays.map((day, index) => <span class={index === 6 ? "text-sacred-gold" : ""}>{day}</span>)}
+      </div>
+      <div class="grid grid-cols-7 gap-y-4 text-sm">
+        {
+          calendarCells.map((day, index) =>
+            day ? (
+              <span
+                class:list={[
+                  "grid h-7 w-7 place-items-center rounded-full",
+                  index % 7 === 6 && "text-sacred-gold",
+                  day === 30 && "bg-sacred-gold text-parchment",
+                ]}>
+                {day}
+              </span>
+            ) : (
+              <span aria-hidden="true" />
+            ),
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="contacte"
+    class="bg-parchment-deep px-[max(32px,calc((100vw-1200px)/2))] py-14 lg:pr-[max(32px,calc((100vw-1200px)/2))] lg:pl-24">
+    <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">Contacte</p>
+    <h2 class="mb-4 font-serif text-[34px] leading-none font-bold uppercase">Cum ne găsiți</h2>
+    <div class="bg-sacred-gold mb-7 h-0.5 w-[70px]"></div>
+    <div class="grid max-w-[580px] gap-6">
+      {
+        contactItems.map((item) => (
+          <div class="grid grid-cols-[38px_1fr] gap-4">
+            <span class="bg-parchment-line h-[38px] w-[38px] rounded-full" aria-hidden="true" />
+            <p>
+              <span class="text-muted-brown block font-sans text-xs uppercase">{item.label}</span>
+              <span class="block text-[17px] leading-6">{item.value}</span>
+            </p>
+          </div>
+        ))
+      }
+      <a
+        class="bg-parchment-line text-muted-brown hover:bg-parchment hover:text-ink mt-1 flex min-h-[108px] items-center justify-center rounded-sm px-6 text-center text-base italic transition"
+        href="https://www.google.com/maps/search/?api=1&query=Manastirea%20Saharna%20Rezina"
+        target="_blank"
+        rel="noreferrer">
+        [ Harta interactivă - Saharna, raionul Rezina ]
+      </a>
+    </div>
+  </div>
+</section>
