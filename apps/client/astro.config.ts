@@ -8,6 +8,7 @@ export default defineConfig({
   prefetch: true,
   output: "static",
   site: "https://victor-apostol.github.io",
+  base: "/msaharna",
 
   integrations: [
     i18n({
