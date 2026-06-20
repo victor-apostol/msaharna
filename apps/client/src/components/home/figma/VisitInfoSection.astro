@@ -1,9 +1,39 @@
 ---
+import { Clock, Mail, MapPin, Phone } from "lucide-astro";
+
+import type { Locale } from "@i18n";
+import { useTranslations } from "@i18n/utils";
+
+type Props = {
+  lang: Locale;
+};
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const iconClass = "h-5 w-5";
+const mapQuery = "Manastirea Saharna Rezina Moldova";
+const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
 const contactItems = [
-  { label: "Adresa", value: "Saharna, Rezina, Republica Moldova" },
-  { label: "Telefon", value: "+373 254 21-XXX" },
-  { label: "Email", value: "office@manastireasaharna.md" },
-  { label: "Ore vizite", value: "Zilnic: 08:00 - 20:00" },
+  {
+    label: t("footer.addressTitle"),
+    value: `${t("footer.addressName")}, ${t("footer.addressLine")}`,
+    href: mapUrl,
+    icon: MapPin,
+  },
+  {
+    label: t("footer.phoneLabel"),
+    value: t("footer.phone"),
+    href: `tel:${t("footer.phone").replace(/\s/g, "")}`,
+    icon: Phone,
+  },
+  {
+    label: t("footer.emailLabel"),
+    value: t("footer.email"),
+    href: `mailto:${t("footer.email").split(",")[0]}`,
+    icon: Mail,
+  },
+  { label: t("home.visitHoursLabel"), value: t("home.visitHours"), href: undefined, icon: Clock },
 ] as const;
 const weekdays = ["Lun", "Mar", "Mie", "Joi", "Vin", "Sâm", "Dum"] as const;
 const calendarCells = [
@@ -46,28 +76,52 @@ const calendarCells = [
   <div
     id="contacte"
     class="bg-parchment-deep px-[max(32px,calc((100vw-1200px)/2))] py-14 lg:pr-[max(32px,calc((100vw-1200px)/2))] lg:pl-24">
-    <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">Contacte</p>
-    <h2 class="mb-4 font-serif text-[34px] leading-none font-bold uppercase">Cum ne găsiți</h2>
+    <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">{t("nav.contact")}</p>
+    <h2 class="mb-4 font-serif text-[34px] leading-none font-bold uppercase">{t("home.findUsTitle")}</h2>
     <div class="bg-sacred-gold mb-7 h-0.5 w-[70px]"></div>
     <div class="grid max-w-[580px] gap-6">
       {
-        contactItems.map((item) => (
-          <div class="grid grid-cols-[38px_1fr] gap-4">
-            <span class="bg-parchment-line h-[38px] w-[38px] rounded-full" aria-hidden="true" />
-            <p>
-              <span class="text-muted-brown block font-sans text-xs uppercase">{item.label}</span>
-              <span class="block text-[17px] leading-6">{item.value}</span>
-            </p>
-          </div>
-        ))
+        contactItems.map((item) => {
+          const Icon = item.icon;
+          const ValueTag = item.href ? "a" : "span";
+
+          return (
+            <div class="grid grid-cols-[38px_1fr] gap-4">
+              <span
+                class="bg-sacred-gold text-ink grid h-[38px] w-[38px] place-items-center rounded-full"
+                aria-hidden="true">
+                <Icon class={iconClass} stroke-width={2.2} />
+              </span>
+              <p>
+                <span class="text-muted-brown block font-sans text-xs uppercase">{item.label}</span>
+                <ValueTag
+                  class:list={[
+                    "block text-[17px] leading-6",
+                    item.href && "hover:text-church-green underline-offset-4 hover:underline",
+                  ]}
+                  href={item.href}>
+                  {item.value}
+                </ValueTag>
+              </p>
+            </div>
+          );
+        })
       }
-      <a
-        class="bg-parchment-line text-muted-brown hover:bg-parchment hover:text-ink mt-1 flex min-h-[108px] items-center justify-center rounded-sm px-6 text-center text-base italic transition"
-        href="https://www.google.com/maps/search/?api=1&query=Manastirea%20Saharna%20Rezina"
-        target="_blank"
-        rel="noreferrer">
-        [ Harta interactivă - Saharna, raionul Rezina ]
-      </a>
+      <div class="border-sacred-gold bg-parchment mt-1 overflow-hidden rounded-sm border-t-4">
+        <iframe
+          class="h-[260px] w-full"
+          title={t("home.mapTitle")}
+          src={mapEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a
+          class="text-church-green hover:bg-parchment-deep flex min-h-12 items-center justify-center px-5 text-center font-sans text-sm font-bold uppercase no-underline transition"
+          href={mapUrl}
+          target="_blank"
+          rel="noreferrer">
+          {t("home.openMap")}
+        </a>
+      </div>
     </div>
   </div>
 </section>

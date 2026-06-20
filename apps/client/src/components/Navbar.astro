@@ -30,6 +30,7 @@ const navItems = [
 ] as const;
 const languageItems = [
   { locale: "ro", label: "RO" },
+  { locale: "en", label: "EN" },
   { locale: "ru", label: "RU" },
 ] as const;
 ---
@@ -74,9 +75,12 @@ const languageItems = [
           languageItems.map((item, index) => (
             <>
               <a
-                class="hover:text-ink"
+                class={`inline-flex min-h-7 items-center rounded-sm px-2 font-bold transition ${
+                  item.locale === lang ? "bg-gold text-ink" : "hover:text-ink"
+                }`}
                 href={getLocalizedPath(path, item.locale)}
-                aria-label={t(`language.${item.locale}`)}>
+                aria-label={t(`language.${item.locale}`)}
+                aria-current={item.locale === lang ? "page" : undefined}>
                 {item.label}
               </a>
               {index < languageItems.length - 1 && <span aria-hidden="true">|</span>}
@@ -119,9 +123,12 @@ const languageItems = [
         {
           languageItems.map((item) => (
             <a
-              class="hover:text-ink"
+              class={`inline-flex min-h-8 items-center rounded-sm px-2 font-bold transition ${
+                item.locale === lang ? "bg-gold text-ink" : "hover:text-ink"
+              }`}
               href={getLocalizedPath(path, item.locale)}
-              aria-label={t(`language.${item.locale}`)}>
+              aria-label={t(`language.${item.locale}`)}
+              aria-current={item.locale === lang ? "page" : undefined}>
               {item.label}
             </a>
           ))

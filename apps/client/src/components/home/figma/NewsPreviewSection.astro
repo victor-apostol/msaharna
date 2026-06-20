@@ -1,61 +1,56 @@
 ---
+import { getRecentPosts } from "@data/posts";
 import type { Locale } from "@i18n";
-import { getLocalizedPath } from "@i18n/utils";
+import { getLocalizedPath, useTranslations } from "@i18n/utils";
 
 type Props = {
   lang: Locale;
 };
 
 const { lang } = Astro.props;
+const t = useTranslations(lang);
+const posts = await getRecentPosts(lang, 3);
 const postsPath = getLocalizedPath("/posts", lang);
-const newsItems = [
-  {
-    type: "Sărbătoare",
-    date: "12 Mai 2025",
-    title: "Hramul Mănăstirii Saharna",
-    text: "În ziua Înălțării Sfintei Cruci, pelerinii au umplut curtea mănăstirii. Slujba solemnă a hramului a fost condusă de Mitropolitul Moldovei.",
-  },
-  {
-    type: "Restaurare",
-    date: "3 Mai 2025",
-    title: "Lucrări la Paraclisul Sf. Macarie",
-    text: "Cu ajutorul donatorilor credincioși au început lucrările de renovare a paraclisului istoric. Finalizarea e preconizată în toamnă.",
-  },
-  {
-    type: "Publicații",
-    date: "18 Apr. 2025",
-    title: "Calendarul Liturgic 2025",
-    text: "Calendarul ortodox al mănăstirii pentru 2025 este disponibil la cancelarie sau poate fi descărcat de pe site.",
-  },
-] as const;
 ---
 
 <section class="bg-parchment-deep py-16">
   <div class="mx-auto w-[min(1200px,calc(100%_-_40px))] max-md:w-[calc(100%_-_32px)]">
     <div class="border-sacred-gold border-t pt-12">
-      <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">Ultimele știri</p>
+      <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">{t("home.latestArticlesEyebrow")}</p>
       <h2 class="mb-5 font-serif text-[38px] leading-tight font-bold uppercase max-sm:text-[30px]">
-        Din viața mănăstirii
+        {t("home.latestArticlesTitle")}
       </h2>
       <div class="bg-sacred-gold mb-8 h-0.5 w-16"></div>
     </div>
-    <div class="grid grid-cols-3 gap-5 max-lg:grid-cols-1">
-      {
-        newsItems.map((item) => (
-          <article class="border-sacred-gold bg-parchment min-h-[360px] rounded-sm border-t-4 p-8">
-            <p class="bg-parchment-deep text-muted-brown mb-3 inline-flex rounded-full px-3 py-1 font-sans text-xs uppercase">
-              {item.type}
-            </p>
-            <p class="text-muted-brown mb-2 text-sm italic">{item.date}</p>
-            <h3 class="mb-5 font-serif text-xl leading-7 font-bold uppercase">{item.title}</h3>
-            <div class="bg-sacred-gold mb-5 h-px w-10" />
-            <p class="text-base leading-7">{item.text}</p>
-            <a class="text-church-green hover:text-sacred-gold mt-8 inline-flex text-base italic" href={postsPath}>
-              Citește mai mult -&gt;
+    {
+      posts.length > 0 && (
+        <div class="grid grid-cols-3 gap-5 max-lg:grid-cols-1">
+          {posts.map((post) => (
+            <a
+              class="border-sacred-gold bg-parchment group text-ink hover:border-gold focus-visible:outline-church-green flex min-h-[360px] flex-col rounded-sm border-t-4 p-8 no-underline transition hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4"
+              href={getLocalizedPath(`/posts/${post.slug}`, lang)}
+              aria-label={post.title}>
+              <p class="bg-parchment-deep text-muted-brown mb-3 inline-flex rounded-full px-3 py-1 font-sans text-xs uppercase">
+                {t("news.title")}
+              </p>
+              {post.date && <p class="text-muted-brown mb-2 text-sm italic">{post.date}</p>}
+              <h3 class="mb-5 font-serif text-xl leading-7 font-bold uppercase">{post.title}</h3>
+              <div class="bg-sacred-gold mb-5 h-px w-10" />
+              <p class="text-base leading-7">{post.excerpt}</p>
+              <span class="text-church-green group-hover:text-gold mt-auto inline-flex pt-8 text-base italic">
+                {t("news.readMore")} -&gt;
+              </span>
             </a>
-          </article>
-        ))
-      }
+          ))}
+        </div>
+      )
+    }
+    <div class="mt-10 flex justify-center">
+      <a
+        class="bg-church-green text-parchment hover:bg-gold hover:text-ink focus-visible:outline-church-green inline-flex min-h-[52px] items-center justify-center rounded-sm px-8 font-sans text-sm font-bold uppercase no-underline transition focus-visible:outline-2 focus-visible:outline-offset-4"
+        href={postsPath}>
+        {t("home.seeAllArticles")}
+      </a>
     </div>
   </div>
 </section>

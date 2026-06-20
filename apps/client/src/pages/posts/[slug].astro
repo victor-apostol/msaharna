@@ -17,38 +17,46 @@ const post = await getPostBySlug(Astro.params.slug, lang);
 ---
 
 <Layout>
-  <main class="bg-site-gray min-h-screen">
+  <main class="bg-parchment text-ink min-h-screen">
     {
       post ? (
         <article>
-          <header class="bg-white py-16 max-sm:py-12">
-            <div class="mx-auto w-[min(980px,calc(100%_-_20px))] max-sm:w-[calc(100%_-_32px)]">
+          <header class="bg-parchment-deep border-parchment-line border-b py-16 max-sm:py-12">
+            <div class="mx-auto w-[min(1040px,calc(100%_-_40px))] max-sm:w-[calc(100%_-_32px)]">
               <a
-                class="text-church-green mb-8 inline-block text-base font-bold no-underline"
+                class="border-parchment-line text-muted-brown hover:border-gold hover:text-ink mb-8 inline-flex min-h-10 items-center rounded-sm border px-4 font-sans text-sm font-bold uppercase no-underline transition"
                 href={getLocalizedPath("/posts", lang)}>
-                {t("news.backToNews")}
+                &lt;- {t("news.backToArticles")}
               </a>
-              <span class="bg-gold mb-8 block h-0.5 w-[70px]" />
-              <h1 class="font-display text-church-green m-0 text-[clamp(38px,5vw,68px)] leading-none font-bold tracking-normal">
+              <span class="bg-sacred-gold mb-8 block h-0.5 w-[70px]" />
+              <h1 class="text-ink m-0 max-w-[920px] font-serif text-[clamp(42px,6vw,76px)] leading-[1.07] font-bold tracking-normal uppercase">
                 {post.title}
               </h1>
-              {post.date && <time class="mt-6 block text-xl text-neutral-500">{post.date}</time>}
+              {post.date && <time class="text-muted-brown mt-6 block text-lg italic">{post.date}</time>}
             </div>
           </header>
 
-          <div class="mx-auto w-[min(980px,calc(100%_-_20px))] py-12 max-sm:w-[calc(100%_-_32px)]">
-            {
-              post.image ? (
-                <img class="mb-10 h-[360px] w-full object-cover" src={post.image.url} alt={post.image.alt} />
-              ) : (
-                <div class="post-image mb-10 h-[360px] overflow-hidden" aria-hidden="true">
-                  <span />
-                </div>
-              )
-            }
-            <div class="bg-white px-8 py-9 shadow-[0_0_0_1px_#dedede] max-sm:px-5">
-              {post.excerpt && <p class="m-0 text-[21px] leading-9 font-bold text-neutral-600">{post.excerpt}</p>}
-              <div class="mt-8 grid gap-6 text-[19px] leading-8 text-neutral-600">
+          <div class="mx-auto w-[min(1040px,calc(100%_-_40px))] py-14 max-sm:w-[calc(100%_-_32px)] max-sm:py-10">
+            {post.image ? (
+              <img
+                class="border-sacred-gold mb-12 h-[420px] w-full rounded-sm border-t-4 object-cover max-md:h-[320px]"
+                src={post.image.url}
+                alt={post.image.alt}
+              />
+            ) : (
+              <div
+                class="post-image border-sacred-gold mb-12 h-[420px] overflow-hidden rounded-sm border-t-4 max-md:h-[320px]"
+                aria-hidden="true">
+                <span />
+              </div>
+            )}
+            <div class="mx-auto max-w-[820px]">
+              {post.excerpt && (
+                <p class="border-sacred-gold text-muted-brown m-0 border-l-4 py-1 pl-6 text-[22px] leading-9 font-bold max-sm:text-xl">
+                  {post.excerpt}
+                </p>
+              )}
+              <div class="text-ink mt-10 grid gap-6 text-[20px] leading-9 max-sm:text-lg max-sm:leading-8">
                 {post.body.map((paragraph) => (
                   <p class="m-0">{paragraph}</p>
                 ))}
@@ -57,14 +65,17 @@ const post = await getPostBySlug(Astro.params.slug, lang);
           </div>
         </article>
       ) : (
-        <section class="bg-white py-20">
-          <div class="mx-auto w-[min(760px,calc(100%_-_20px))] max-sm:w-[calc(100%_-_32px)]">
-            <h1 class="font-display text-church-green m-0 text-[clamp(38px,5vw,62px)] leading-none font-bold">
+        <section class="bg-parchment-deep py-20">
+          <div class="mx-auto w-[min(760px,calc(100%_-_40px))] max-sm:w-[calc(100%_-_32px)]">
+            <span class="bg-sacred-gold mb-8 block h-0.5 w-[70px]" />
+            <h1 class="text-ink m-0 font-serif text-[clamp(38px,5vw,62px)] leading-none font-bold">
               {t("news.notFoundTitle")}
             </h1>
-            <p class="mt-5 text-xl leading-8 text-neutral-600">{t("news.notFoundDescription")}</p>
-            <a class="text-church-green mt-6 inline-block font-bold no-underline" href={getLocalizedPath("/posts", lang)}>
-              {t("news.backToNews")}
+            <p class="text-muted-brown mt-5 text-xl leading-8">{t("news.notFoundDescription")}</p>
+            <a
+              class="text-church-green hover:text-gold mt-6 inline-block font-bold no-underline transition"
+              href={getLocalizedPath("/posts", lang)}>
+              {t("news.backToArticles")}
             </a>
           </div>
         </section>
