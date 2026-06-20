@@ -35,29 +35,34 @@ const languageItems = [
 ] as const;
 ---
 
-<header class="bg-parchment border-parchment-line sticky top-0 z-50 border-b">
+<header class="bg-church-green border-sacred-gold/70 sticky top-0 z-50 border-b">
   <input id="primary-menu-toggle" class="peer sr-only" type="checkbox" aria-hidden="true" />
   <div
     class="mx-auto grid h-20 w-[min(1200px,calc(100%_-_40px))] grid-cols-[auto_1fr_auto] items-center gap-6 max-lg:w-full max-lg:grid-cols-[auto_1fr_auto] max-lg:pr-0 max-lg:pl-4 max-sm:h-[68px] peer-checked:[&_.burger-bottom]:top-[7px] peer-checked:[&_.burger-bottom]:-rotate-45 peer-checked:[&_.burger-middle]:opacity-0 peer-checked:[&_.burger-top]:top-[7px] peer-checked:[&_.burger-top]:rotate-45">
     <a
-      class="text-ink flex min-w-0 items-center gap-3 no-underline"
+      class="text-parchment flex min-w-0 items-center gap-2.5 no-underline"
       href={getLocalizedPath("/", lang)}
       aria-label={t("main.title")}>
       <span
-        class="border-sacred-gold/70 bg-parchment-line grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full border max-sm:h-10 max-sm:w-10">
-        <img class="h-full w-full object-cover object-center mix-blend-multiply" src={logoUrl} alt="" />
+        class="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full border-2 border-white/85 bg-white p-0.5 shadow-[0_0_0_1px_rgb(255_255_255_/_18%)] max-sm:h-10 max-sm:w-10">
+        <img class="h-full w-full rounded-full object-cover object-center" src={logoUrl} alt="" />
       </span>
-      <span class="font-serif text-xl leading-none font-bold uppercase max-sm:text-base">Saharna</span>
+      <span
+        class="grid gap-0.5 font-serif text-[13px] leading-[0.95] font-bold tracking-[0.08em] uppercase max-sm:text-[10px]">
+        <span>{t("main.logoLineOne")}</span>
+        <span>{t("main.logoLineTwo")}</span>
+        <span>{t("main.logoLineThree")}</span>
+      </span>
     </a>
 
     <nav
-      class="text-ink flex items-center justify-center gap-10 text-[15px] leading-none max-xl:gap-6 max-lg:hidden"
+      class="text-parchment flex items-center justify-center gap-10 text-[15px] leading-none max-xl:gap-6 max-lg:hidden"
       aria-label={t("nav.menu")}>
       {
         navItems.map((item) => (
           <a
-            class={`hover:text-church-green whitespace-nowrap underline-offset-8 transition hover:underline ${
-              item.active ? "text-church-green underline" : ""
+            class={`hover:text-sacred-gold whitespace-nowrap underline-offset-8 transition hover:underline ${
+              item.active ? "text-sacred-gold underline" : ""
             }`}
             href={item.href}
             aria-current={item.active ? "page" : undefined}>
@@ -69,14 +74,14 @@ const languageItems = [
 
     <div class="flex items-center justify-end gap-5">
       <nav
-        class="text-muted-brown hidden items-center gap-2 font-sans text-xs sm:flex"
+        class="text-parchment/80 hidden items-center gap-2 font-sans text-xs sm:flex"
         aria-label={t("language.label")}>
         {
           languageItems.map((item, index) => (
             <>
               <a
                 class={`inline-flex min-h-7 items-center rounded-sm px-2 font-bold transition ${
-                  item.locale === lang ? "bg-gold text-ink" : "hover:text-ink"
+                  item.locale === lang ? "bg-gold text-ink" : "hover:text-white"
                 }`}
                 href={getLocalizedPath(path, item.locale)}
                 aria-label={t(`language.${item.locale}`)}
@@ -91,7 +96,7 @@ const languageItems = [
 
       <label
         for="primary-menu-toggle"
-        class="text-ink border-parchment-line bg-parchment hover:bg-parchment-deep hidden h-11 w-11 cursor-pointer list-none items-center justify-center rounded-sm border transition marker:hidden max-lg:inline-flex [&::-webkit-details-marker]:hidden"
+        class="text-parchment hidden h-11 w-11 cursor-pointer list-none items-center justify-center rounded-sm border border-white/40 bg-white/10 transition marker:hidden hover:bg-white/20 max-lg:inline-flex [&::-webkit-details-marker]:hidden"
         aria-label={t("nav.openMenu")}
         aria-controls="primary-menu">
         <span class="sr-only">{t("nav.menu")}</span>
@@ -106,25 +111,25 @@ const languageItems = [
 
   <nav
     id="primary-menu"
-    class="bg-parchment border-parchment-line hidden border-t peer-checked:block lg:hidden"
+    class="bg-church-green border-sacred-gold/70 hidden border-t peer-checked:block lg:hidden"
     aria-label={t("nav.menu")}>
-    <div class="text-ink mx-auto grid w-[calc(100%_-_32px)] gap-1 py-4 text-base">
+    <div class="text-parchment mx-auto grid w-[calc(100%_-_32px)] gap-1 py-4 text-base">
       {
         navItems.map((item) => (
           <a
-            class={`rounded-sm px-3 py-3 transition ${item.active ? "bg-parchment-deep text-church-green" : "hover:bg-parchment-deep"}`}
+            class={`rounded-sm px-3 py-3 transition ${item.active ? "text-sacred-gold bg-white/10" : "hover:bg-white/10"}`}
             href={item.href}
             aria-current={item.active ? "page" : undefined}>
             {t(item.key)}
           </a>
         ))
       }
-      <div class="border-parchment-line text-muted-brown mt-2 flex gap-3 border-t pt-4 font-sans text-sm sm:hidden">
+      <div class="text-parchment/80 mt-2 flex gap-3 border-t border-white/20 pt-4 font-sans text-sm sm:hidden">
         {
           languageItems.map((item) => (
             <a
               class={`inline-flex min-h-8 items-center rounded-sm px-2 font-bold transition ${
-                item.locale === lang ? "bg-gold text-ink" : "hover:text-ink"
+                item.locale === lang ? "bg-gold text-ink" : "hover:text-white"
               }`}
               href={getLocalizedPath(path, item.locale)}
               aria-label={t(`language.${item.locale}`)}

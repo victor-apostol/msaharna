@@ -21,6 +21,9 @@ export const ui = {
     main: {
       title: "Mănăstirea Saharna",
       description: "Mănăstirea Saharna, loc de rugăciune, pelerinaj și slujire ortodoxă.",
+      logoLineOne: "Sfânta",
+      logoLineTwo: "Mănăstire",
+      logoLineThree: "Saharna",
     },
     social: {
       label: "Rețele sociale",
@@ -192,6 +195,9 @@ export const ui = {
     main: {
       title: "Saharna Monastery",
       description: "Saharna Monastery, a place of Orthodox prayer, pilgrimage, and service.",
+      logoLineOne: "Sfânta",
+      logoLineTwo: "Mănăstire",
+      logoLineThree: "Saharna",
     },
     social: {
       label: "Social links",
@@ -361,6 +367,9 @@ export const ui = {
     main: {
       title: "Монастырь Сахарна",
       description: "Монастырь Сахарна, место православной молитвы, паломничества и служения.",
+      logoLineOne: "Sfânta",
+      logoLineTwo: "Mănăstire",
+      logoLineThree: "Saharna",
     },
     social: {
       label: "Социальные сети",
