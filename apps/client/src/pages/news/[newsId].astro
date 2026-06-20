@@ -29,7 +29,7 @@ const post = await getPostBySlug(Astro.params.newsId, lang);
                 &lt;- {t("news.backToArticles")}
               </a>
               <span class="bg-sacred-gold mb-8 block h-0.5 w-[70px]" />
-              <h1 class="text-ink m-0 max-w-[920px] font-serif text-[clamp(42px,6vw,76px)] leading-[1.07] font-bold tracking-normal uppercase">
+              <h1 class="text-ink m-0 max-w-[860px] font-serif text-[clamp(32px,4.4vw,54px)] leading-[1.12] font-bold tracking-normal uppercase">
                 {post.title}
               </h1>
               {post.date && <time class="text-muted-brown mt-6 block text-lg italic">{post.date}</time>}
