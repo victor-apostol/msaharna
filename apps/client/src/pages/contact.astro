@@ -1,0 +1,116 @@
+---
+import { Clock, Mail, MapPin, Phone } from "lucide-astro";
+
+import Layout from "@layouts/Layout.astro";
+import { getLocaleFromUrl, useTranslations } from "@i18n/utils";
+
+const lang = getLocaleFromUrl(Astro.url);
+const t = useTranslations(lang);
+const iconClass = "h-5 w-5";
+const mapQuery = "Manastirea Saharna Rezina Moldova";
+const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
+const contactItems = [
+  {
+    label: t("footer.addressTitle"),
+    value: `${t("footer.addressName")}, ${t("footer.addressLine")}`,
+    href: mapUrl,
+    icon: MapPin,
+  },
+  {
+    label: t("footer.phoneLabel"),
+    value: t("footer.phone"),
+    href: `tel:${t("footer.phone").replace(/\s/g, "")}`,
+    icon: Phone,
+  },
+  {
+    label: t("footer.emailLabel"),
+    value: t("footer.email"),
+    href: `mailto:${t("footer.email").split(",")[0]}`,
+    icon: Mail,
+  },
+  {
+    label: t("home.visitHoursLabel"),
+    value: t("home.visitHours"),
+    href: undefined,
+    icon: Clock,
+  },
+] as const;
+---
+
+<Layout>
+  <main class="bg-parchment text-ink min-h-screen">
+    <section
+      class="bg-parchment-deep border-parchment-line border-b py-16 max-sm:py-12"
+      aria-labelledby="contact-title">
+      <div class="mx-auto w-[min(1120px,calc(100%_-_20px))] max-sm:w-[calc(100%_-_32px)]">
+        <span class="bg-sacred-gold mb-8 block h-0.5 w-[70px]"></span>
+        <h1
+          id="contact-title"
+          class="text-ink m-0 font-serif text-[clamp(42px,5vw,72px)] leading-none font-bold tracking-normal uppercase">
+          {t("nav.contact")}
+        </h1>
+      </div>
+    </section>
+
+    <section class="py-16 max-sm:py-10">
+      <div class="mx-auto w-[min(860px,calc(100%_-_20px))] max-sm:w-[calc(100%_-_32px)]">
+        <article
+          class="border-parchment-line bg-parchment border-t-sacred-gold border-t-4 p-7 shadow-[0_0_0_1px_var(--color-parchment-line)] md:p-10">
+          <header class="mb-8">
+            <h2 class="text-ink mt-0 mb-3 font-serif text-[34px] leading-none font-bold uppercase">
+              {t("home.findUsTitle")}
+            </h2>
+            <div class="bg-sacred-gold h-0.5 w-[70px]"></div>
+          </header>
+
+          <div class="grid gap-5">
+            {
+              contactItems.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div class="grid grid-cols-[42px_1fr] gap-4">
+                    <span
+                      class="bg-sacred-gold text-ink grid h-[42px] w-[42px] place-items-center rounded-full"
+                      aria-hidden="true">
+                      <Icon class={iconClass} stroke-width={2.2} />
+                    </span>
+                    <p class="m-0">
+                      <span class="text-muted-brown block font-sans text-xs uppercase">{item.label}</span>
+                      {item.href ? (
+                        <a
+                          class="hover:text-church-green block text-[18px] leading-7 underline-offset-4 hover:underline"
+                          href={item.href}>
+                          {item.value}
+                        </a>
+                      ) : (
+                        <span class="block text-[18px] leading-7">{item.value}</span>
+                      )}
+                    </p>
+                  </div>
+                );
+              })
+            }
+          </div>
+
+          <section class="border-sacred-gold bg-parchment-deep mt-9 overflow-hidden rounded-sm border-t-4">
+            <iframe
+              class="h-[340px] w-full max-sm:h-[280px]"
+              title={t("home.mapTitle")}
+              src={mapEmbedUrl}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <a
+              class="text-church-green hover:bg-parchment flex min-h-12 items-center justify-center px-5 text-center font-sans text-sm font-bold uppercase no-underline transition"
+              href={mapUrl}
+              target="_blank"
+              rel="noreferrer">
+              {t("home.openMap")}
+            </a>
+          </section>
+        </article>
+      </div>
+    </section>
+  </main>
+</Layout>

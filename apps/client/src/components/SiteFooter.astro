@@ -14,7 +14,8 @@ const footerLinks = [
   { key: "nav.presentation", href: homeAnchor("prezentare") },
   { key: "nav.directions", href: homeAnchor("cum-de-ajuns") },
   { key: "nav.serviceSchedule", href: homeAnchor("programul-slujbelor") },
-  { key: "nav.contact", href: homeAnchor("contacte") },
+  { key: "nav.pomelnic", href: "#pomelnic-modal" },
+  { key: "nav.contact", href: getLocalizedPath("/contact", lang) },
   { key: "nav.donations", href: getLocalizedPath("/donations", lang) },
 ] as const;
 ---
@@ -25,7 +26,7 @@ const footerLinks = [
       <p class="text-parchment font-serif text-lg font-bold uppercase">{t("main.title")}</p>
       <p class="mt-2 text-sm italic">{t("footer.description")}</p>
     </div>
-    <nav class="mb-8 grid grid-cols-5 gap-5 text-sm max-lg:grid-cols-2 max-sm:grid-cols-1" aria-label={t("nav.menu")}>
+    <nav class="mb-8 grid grid-cols-6 gap-5 text-sm max-lg:grid-cols-2 max-sm:grid-cols-1" aria-label={t("nav.menu")}>
       {
         footerLinks.map((item) => (
           <a class="hover:text-parchment" href={item.href}>

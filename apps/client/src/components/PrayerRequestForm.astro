@@ -17,7 +17,8 @@ const formAction = pomelnicWorkerUrl
     ? pomelnicWorkerUrl
     : `https://${pomelnicWorkerUrl}`
   : "#";
-const redirectUrl = `${Astro.url.origin}${Astro.url.pathname}#pomelnic-form`;
+const redirectTarget = compact ? "#pomelnic-modal" : "#pomelnic-form";
+const redirectUrl = `${Astro.url.origin}${Astro.url.pathname}${redirectTarget}`;
 
 const inputClass =
   "mt-2 w-full rounded-md border border-neutral-200 bg-white px-4 py-3 text-base text-neutral-900 shadow-sm outline-none transition focus:border-church-green focus:ring-4 focus:ring-church-green/15";

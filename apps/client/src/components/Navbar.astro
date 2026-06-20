@@ -19,13 +19,16 @@ const normalizedPath =
 const isHome = normalizedPath === "/" || normalizedPath === `/${lang}`;
 const donationsPath = getLocalizedPath("/donations", lang);
 const isDonations = normalizedPath === "/donations" || normalizedPath === `/${lang}/donations`;
+const contactPath = getLocalizedPath("/contact", lang);
+const isContact = normalizedPath === "/contact" || normalizedPath === `/${lang}/contact`;
 const homePath = getLocalizedPath("/", lang);
 const homeAnchor = (id: string) => `${homePath}#${id}`;
 const navItems = [
   { key: "nav.presentation", href: homeAnchor("prezentare"), active: isHome },
   { key: "nav.directions", href: homeAnchor("cum-de-ajuns"), active: false },
   { key: "nav.serviceSchedule", href: homeAnchor("programul-slujbelor"), active: false },
-  { key: "nav.contact", href: homeAnchor("contacte"), active: false },
+  { key: "nav.pomelnic", href: "#pomelnic-modal", active: false },
+  { key: "nav.contact", href: contactPath, active: isContact },
   { key: "nav.donations", href: donationsPath, active: isDonations },
 ] as const;
 const languageItems = [
