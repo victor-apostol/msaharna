@@ -35,7 +35,15 @@ const contactItems = [
   },
   { label: t("home.visitHoursLabel"), value: t("home.visitHours"), href: undefined, icon: Clock },
 ] as const;
-const weekdays = ["Lun", "Mar", "Mie", "Joi", "Vin", "Sâm", "Dum"] as const;
+const weekdays = [
+  t("home.figmaCalendarMonday"),
+  t("home.figmaCalendarTuesday"),
+  t("home.figmaCalendarWednesday"),
+  t("home.figmaCalendarThursday"),
+  t("home.figmaCalendarFriday"),
+  t("home.figmaCalendarSaturday"),
+  t("home.figmaCalendarSunday"),
+] as const;
 const calendarCells = [
   ...Array.from({ length: 3 }, () => null),
   ...Array.from({ length: 31 }, (_, index) => index + 1),
@@ -46,8 +54,8 @@ const calendarCells = [
   <div
     id="calendar-liturgic"
     class="bg-parchment px-[max(32px,calc((100vw-1200px)/2))] py-14 lg:pr-20 lg:pl-[max(32px,calc((100vw-1200px)/2))]">
-    <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">Calendar liturgic</p>
-    <h2 class="mb-5 font-serif text-[34px] leading-none font-bold uppercase">Mai 2025</h2>
+    <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">{t("home.figmaCalendarEyebrow")}</p>
+    <h2 class="mb-5 font-serif text-[34px] leading-none font-bold uppercase">{t("home.figmaCalendarMonth")}</h2>
     <div class="border-parchment-line max-w-[380px] border-t pt-4">
       <div class="text-muted-brown mb-4 grid grid-cols-7 gap-y-3 font-sans text-xs">
         {weekdays.map((day, index) => <span class={index === 6 ? "text-sacred-gold" : ""}>{day}</span>)}

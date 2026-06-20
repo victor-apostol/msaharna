@@ -1,11 +1,19 @@
 ---
+import type { Locale } from "@i18n";
+import { useTranslations } from "@i18n/utils";
 import { publicAsset } from "@utils/paths";
 
+type Props = {
+  lang: Locale;
+};
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 const galleryItems = [
-  { label: "Biserica principală", image: publicAsset("/images/history-header.png") },
-  { label: "Curtea mănăstirii", image: publicAsset("/images/representation-first.jpg") },
-  { label: "Crucea de pe cupolă", image: publicAsset("/images/representation-middle.jpg") },
-  { label: "Schitul rupestru", image: publicAsset("/images/representation-third.jpg") },
+  { label: t("home.figmaGalleryMainChurch"), image: publicAsset("/images/history-header.png") },
+  { label: t("home.figmaGalleryCourtyard"), image: publicAsset("/images/representation-first.jpg") },
+  { label: t("home.figmaGalleryCupolaCross"), image: publicAsset("/images/representation-middle.jpg") },
+  { label: t("home.figmaGalleryCaveSkete"), image: publicAsset("/images/representation-third.jpg") },
 ] as const;
 ---
 
@@ -13,15 +21,12 @@ const galleryItems = [
   <div class="mx-auto w-[min(1200px,calc(100%_-_40px))] max-md:w-[calc(100%_-_32px)]">
     <div class="mb-8 flex items-end justify-between gap-6 max-sm:block">
       <div>
-        <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">Galerie foto</p>
+        <p class="text-sacred-gold mb-3 font-sans text-xs uppercase">{t("home.figmaGalleryEyebrow")}</p>
         <h2 class="font-serif text-[36px] leading-tight font-bold uppercase max-sm:text-[28px]">
-          Frumusețea locului sfânt
+          {t("home.figmaGalleryTitle")}
         </h2>
         <div class="bg-sacred-gold mt-4 h-0.5 w-16"></div>
       </div>
-      <a class="text-church-green hover:text-ink text-base italic max-sm:mt-5 max-sm:inline-flex" href="#galerie"
-        >Vezi toată galeria -&gt;</a
-      >
     </div>
     <div class="grid grid-cols-[1.35fr_0.9fr_0.9fr_1.35fr] gap-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
       {

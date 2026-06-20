@@ -1,6 +1,6 @@
 ---
 import type { Locale } from "@i18n";
-import { getLocalizedPath } from "@i18n/utils";
+import { getLocalizedPath, useTranslations } from "@i18n/utils";
 import { publicAsset } from "@utils/paths";
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
 };
 
 const { lang } = Astro.props;
+const t = useTranslations(lang);
 const donationsPath = getLocalizedPath("/donations", lang);
 const heroImage = publicAsset("/images/history-header.png");
 ---
@@ -27,38 +28,33 @@ const heroImage = publicAsset("/images/history-header.png");
         <img
           class="h-[500px] w-full object-cover opacity-80 max-sm:h-[330px]"
           src={heroImage}
-          alt="Mănăstirea Saharna văzută de sus"
+          alt={t("home.figmaHeroImageAlt")}
         />
-        <figcaption class="text-muted-brown absolute right-0 bottom-5 left-0 text-center text-sm italic">
-          - Fotografie Mănăstire -
-        </figcaption>
       </figure>
     </div>
 
     <div class="max-w-[360px] justify-self-end max-lg:max-w-[620px] max-lg:justify-self-start">
-      <p class="text-muted-brown mb-4 font-serif text-sm uppercase">Unde duhul dumnezeiesc...</p>
+      <p class="text-muted-brown mb-4 font-serif text-sm uppercase">{t("home.figmaHeroEyebrow")}</p>
       <h1 class="mb-5 font-serif text-[44px] leading-[1.14] font-bold uppercase max-sm:text-[32px]">
-        Își deschide porțile Saharna
+        {t("home.figmaHeroTitle")}
       </h1>
       <div class="bg-sacred-gold mb-4 h-0.5 w-14"></div>
-      <p class="mb-8 text-[17px] leading-7">
-        Un loc sfânt al rugăciunii și al harului dumnezeiesc, în inima Moldovei pe malul Nistrului.
-      </p>
+      <p class="mb-8 text-[17px] leading-7">{t("home.figmaHeroDescription")}</p>
       <div class="flex flex-wrap gap-4">
         <a
           class="bg-church-green text-parchment hover:bg-ink inline-flex min-h-[50px] items-center justify-center rounded-sm px-7 font-sans text-sm uppercase transition"
           href="#cum-de-ajuns">
-          Vizitați-ne
+          {t("home.figmaVisitButton")}
         </a>
         <a
           class="border-church-green text-church-green hover:bg-church-green hover:text-parchment inline-flex min-h-[50px] items-center justify-center rounded-sm border px-7 font-sans text-sm uppercase transition"
           href={donationsPath}>
-          Donați
+          {t("nav.donations")}
         </a>
       </div>
     </div>
   </div>
   <p class="text-muted-brown mx-auto w-[min(1200px,calc(100%_-_32px))] pb-6 text-center text-sm italic">
-    Casa Dumnezeieștii Treimi · site-ul oficial al Mănăstirii Saharna
+    {t("home.figmaHeroFootnote")}
   </p>
 </section>
