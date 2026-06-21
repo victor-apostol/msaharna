@@ -20,7 +20,7 @@ const footerLinks = [
 ] as const;
 const socialLinks = [
   { key: "social.youtube", href: "https://www.youtube.com/@manastirea.saharna", icon: "youtube", mark: "" },
-  { key: "social.facebook", href: "#", icon: "text", mark: "f" },
+  { key: "social.facebook", href: "https://www.facebook.com/ManastireaSaharna/", icon: "text", mark: "f" },
   { key: "social.tiktok", href: "https://www.tiktok.com/@monklife?_r=1&_t=ZS-972uTnfFdwq", icon: "tiktok", mark: "" },
 ] as const;
 ---
@@ -48,8 +48,8 @@ const socialLinks = [
             href={item.href}
             aria-label={t(item.key)}
             title={t(item.key)}
-            target={item.href === "#" ? undefined : "_blank"}
-            rel={item.href === "#" ? undefined : "noreferrer"}>
+            target="_blank"
+            rel="noreferrer">
             {
               item.icon === "youtube" ? (
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
