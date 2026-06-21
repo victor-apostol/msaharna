@@ -39,7 +39,7 @@ jobs:
       - name: Build client
         run: bun run build:client
         env:
-          PAYLOAD_API_URL: ${{ vars.PAYLOAD_API_URL || 'https://msaharna.onrender.com' }}
+          PAYLOAD_API_URL: ${{ vars.PAYLOAD_API_URL || 'https://msaharna-rgvd.onrender.com' }}
           PUBLIC_POMELNIC_WORKER_URL: ${{ vars.PUBLIC_POMELNIC_WORKER_URL || 'https://manastirea-saharna-pomelnic.victorapostol679.workers.dev' }}
           PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAADRMyvsUgNG0uZo4'}}
 
