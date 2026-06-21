@@ -40,35 +40,37 @@ const socialLinks = [
         ))
       }
     </nav>
-    <nav class="mb-8 flex items-center justify-center gap-3" aria-label={t("social.label")}>
-      {
-        socialLinks.map((item) => (
-          <a
-            class="border-parchment/35 text-parchment hover:border-sacred-gold hover:bg-sacred-gold hover:text-ink inline-flex h-10 w-10 items-center justify-center rounded-full border text-base font-bold no-underline transition"
-            href={item.href}
-            aria-label={t(item.key)}
-            title={t(item.key)}
-            target="_blank"
-            rel="noreferrer">
-            {
-              item.icon === "youtube" ? (
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z" />
-                </svg>
-              ) : item.icon === "tiktok" ? (
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M16.6 2c.3 2.6 1.8 4.2 4.3 4.4v3.1a7.6 7.6 0 0 1-4.3-1.3v7.6c0 3.9-2.6 6.2-6.1 6.2-3.6 0-6.4-2.7-6.4-6.1 0-3.7 3.1-6.5 7-6.1v3.2c-2-.3-3.7.9-3.7 2.8 0 1.7 1.4 3 3.1 3 1.8 0 2.8-1.1 2.8-3.3V2h3.3Z" />
-                </svg>
-              ) : (
-                <span aria-hidden="true">{item.mark}</span>
-              )
-            }
-          </a>
-        ))
-      }
-    </nav>
-    <div class="border-t border-white/20 pt-5 text-center text-sm">
-      {t("footer.copyright")}
+    <div class="border-t border-white/20 pt-5 text-sm">
+      <div class="flex items-center justify-between gap-4 max-sm:flex-col max-sm:items-center max-sm:text-center">
+        <p class="m-0">{t("footer.copyright")}</p>
+        <nav class="ml-auto flex shrink-0 items-center justify-end gap-2 max-sm:ml-0" aria-label={t("social.label")}>
+          {
+            socialLinks.map((item) => (
+              <a
+                class="border-parchment/30 text-parchment/85 hover:border-sacred-gold hover:bg-sacred-gold hover:text-ink inline-flex h-7 w-7 items-center justify-center rounded-full border text-xs font-bold no-underline transition"
+                href={item.href}
+                aria-label={t(item.key)}
+                title={t(item.key)}
+                target="_blank"
+                rel="noreferrer">
+                {
+                  item.icon === "youtube" ? (
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z" />
+                    </svg>
+                  ) : item.icon === "tiktok" ? (
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M16.6 2c.3 2.6 1.8 4.2 4.3 4.4v3.1a7.6 7.6 0 0 1-4.3-1.3v7.6c0 3.9-2.6 6.2-6.1 6.2-3.6 0-6.4-2.7-6.4-6.1 0-3.7 3.1-6.5 7-6.1v3.2c-2-.3-3.7.9-3.7 2.8 0 1.7 1.4 3 3.1 3 1.8 0 2.8-1.1 2.8-3.3V2h3.3Z" />
+                    </svg>
+                  ) : (
+                    <span aria-hidden="true">{item.mark}</span>
+                  )
+                }
+              </a>
+            ))
+          }
+        </nav>
+      </div>
     </div>
   </div>
 </footer>
