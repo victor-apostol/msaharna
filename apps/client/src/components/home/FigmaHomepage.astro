@@ -24,5 +24,9 @@ const { lang } = Astro.props;
   <GallerySection lang={lang} />
   <VisitCta lang={lang} />
   <PomelnicSection lang={lang} />
+  <div class="bg-parchment relative" aria-hidden="true">
+    <span class="bg-parchment-line block h-px w-full"></span>
+    <span class="border-sacred-gold bg-church-green absolute top-1/2 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rotate-45 border"></span>
+  </div>
   <VisitInfoSection lang={lang} />
 </section>

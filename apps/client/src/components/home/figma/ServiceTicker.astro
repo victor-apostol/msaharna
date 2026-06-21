@@ -8,13 +8,18 @@ type Props = {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+const quote = t("home.quote").replace(/^"|"$/g, "");
+const quoteBreakIndex = quote.indexOf("! ");
+const quoteLead = quoteBreakIndex >= 0 ? quote.slice(0, quoteBreakIndex + 1) : "";
+const quoteBody = quoteBreakIndex >= 0 ? quote.slice(quoteBreakIndex + 2) : quote;
 ---
 
-<section id="programul-slujbelor" class="border-sacred-gold bg-church-green border-y-2 px-4 py-4 text-center">
-  <p class="text-parchment text-[22px] leading-7 max-sm:text-lg">
-    {t("home.figmaServiceSchedule")}
-  </p>
-  <a class="text-sacred-gold hover:text-parchment mt-1 inline-flex text-sm italic" href="#calendar-liturgic"
-    >{t("home.figmaServiceLink")} -&gt;</a
-  >
+<section id="programul-slujbelor" class="border-sacred-gold bg-church-green border-y-2 px-5 py-8 max-sm:py-7">
+  <figure class="mx-auto my-0 w-[min(880px,calc(100%_-_20px))] border-l-[7px] border-[#8a6818]/85 pl-7 max-sm:pl-5">
+    <blockquote class="m-0">
+      {quoteLead && <span class="text-parchment block font-serif text-[clamp(22px,2.5vw,30px)] leading-tight font-bold">{quoteLead}</span>}
+      <span class="mt-3 block text-[16px] leading-7 text-[#c6c7b5] max-sm:text-[15px] max-sm:leading-7">{quoteBody}</span>
+    </blockquote>
+  </figure>
 </section>

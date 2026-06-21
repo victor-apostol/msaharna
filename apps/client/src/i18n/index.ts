@@ -30,6 +30,7 @@ export const ui = {
       facebook: "Facebook",
       instagram: "Instagram",
       youtube: "YouTube",
+      tiktok: "TikTok",
     },
     language: {
       label: "Limbi",
@@ -188,7 +189,7 @@ export const ui = {
       emailLabel: "E-mail:",
       email: "info@manastirea-saharna.md, secretariat@manastirea-saharna.md",
       description: "Mănăstirea Saharna. Site oficial.",
-      copyright: 'Mănăstirea "Sfânta Treime" din Saharna @ 2005-2026',
+      copyright: 'Mănăstirea "Sfânta Treime" din Saharna @ 2005-2026 · Site oficial',
     },
   },
   en: {
@@ -204,6 +205,7 @@ export const ui = {
       facebook: "Facebook",
       instagram: "Instagram",
       youtube: "YouTube",
+      tiktok: "TikTok",
     },
     language: {
       label: "Languages",
@@ -290,7 +292,8 @@ export const ui = {
       heroLabel: "Saharna Monastery",
       heroTitle: "Saharna Monastery",
       heroSubtitle: "A place of prayer, pilgrimage, and inner peace",
-      quote: '"Let us keep faith alive through prayer, mercy, and love for our neighbor."',
+      quote:
+        '"Welcome, pilgrim! Crossing the threshold of the holy monastery with faith, you will receive the blessing of the Holy Trinity. Here, the fruits of the earth become the Body and Blood of Christ unto eternal life, and the Mother of God embraces you as heirs of the heavenly Kingdom."',
       quoteAuthor: "- The brotherhood of Saharna Monastery",
       recentPosts: "Recent Posts",
       allNews: "All news",
@@ -360,7 +363,7 @@ export const ui = {
       emailLabel: "E-mail:",
       email: "info@manastirea-saharna.md, secretariat@manastirea-saharna.md",
       description: "Saharna Monastery. Official Website.",
-      copyright: 'Saharna "Holy Trinity" Monastery @ 2005-2026',
+      copyright: 'Saharna "Holy Trinity" Monastery @ 2005-2026 · Official site',
     },
   },
   ru: {
@@ -376,6 +379,7 @@ export const ui = {
       facebook: "Facebook",
       instagram: "Instagram",
       youtube: "YouTube",
+      tiktok: "TikTok",
     },
     language: {
       label: "Языки",
@@ -462,7 +466,8 @@ export const ui = {
       heroLabel: "Монастырь Сахарна",
       heroTitle: "Монастырь Сахарна",
       heroSubtitle: "Место молитвы, паломничества и душевного мира",
-      quote: '"Будем хранить веру молитвой, милосердием и любовью к ближнему."',
+      quote:
+        '"Добро пожаловать, паломник! Переступая с верой порог святой обители, вы получите благословение Святой Троицы. Здесь плоды земли становятся Телом и Кровью Христа во жизнь вечную, а Божия Матерь принимает вас как наследников Небесного Царства."',
       quoteAuthor: "- Братия монастыря Сахарна",
       recentPosts: "Последние новости",
       allNews: "Все новости",
@@ -531,7 +536,7 @@ export const ui = {
       emailLabel: "E-mail:",
       email: "info@manastirea-saharna.md, secretariat@manastirea-saharna.md",
       description: "Монастырь Сахарна. Официальный сайт.",
-      copyright: 'Монастырь "Святая Троица" в Сахарне @ 2005-2026',
+      copyright: 'Монастырь "Святая Троица" в Сахарне @ 2005-2026 · Официальный сайт',
     },
   },
 } as const;
